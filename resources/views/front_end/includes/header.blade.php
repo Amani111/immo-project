@@ -49,7 +49,7 @@
 										<li><a href="cart.html">Cart</a></li>
 										<li><a href="checkout.html">Checkout</a></li>
 										<li><a href="my-account.html">My Account</a></li>
-										<li><a href="login-register.html">Login</a></li>
+										<li><a href="{{route('logout')}}">Login</a></li>
 									</ul>
 								</div>
 							</div>
@@ -196,7 +196,7 @@
 
 						<div class="sticky-logo">
 							<a href="index.html">
-								<img width="186" height="53"  src="assets/images/logo.webp" class="img-fluid" alt="">
+								<img width="186" height="53"  src="{{('front-end/images/logo.webp')}}" class="img-fluid" alt="">
 							</a>
 						</div>
 
@@ -219,8 +219,8 @@
 								<ul>
 									<li class="active"><a href="#">ACCUEIL</a></li>
 									<li><a href="#">STE</a></li>
-									<li><a href="#">PACKS</a></li>
-									<li><a href="#">CONTACT</a></li>
+									<li><a href="{{route('packs')}}">PACKS</a></li>
+									<li><a href="{{route('contact')}}">CONTACT</a></li>
 								</ul>
 							</nav>
 						</div>

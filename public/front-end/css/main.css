@@ -157,7 +157,7 @@ ul {
   padding: 0;
 }
 
-/*-- 
+/*--
     - Input Placeholder
 -----------------------------------------*/
 input:-moz-placeholder, textarea:-moz-placeholder {
@@ -3942,7 +3942,7 @@ a#more-btn {
   -webkit-box-shadow: none !important;
           box-shadow: none !important;
 }
-.blog-post-slider-container.fl-slider .slick-active {
+/* .blog-post-slider-container.fl-slider .slick-active {
   position: relative;
 }
 .blog-post-slider-container.fl-slider .slick-active::after {
@@ -3971,7 +3971,7 @@ a#more-btn {
   width: 1px;
   height: 100%;
   background: #fff;
-}
+} */
 
 /*----------  blog post slider container two  ----------*/
 .blog-post-slider-container-two.fl-slider {

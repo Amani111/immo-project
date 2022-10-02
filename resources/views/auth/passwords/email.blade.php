@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('front_end.layouts.app')
+
+@section('title','modifier votre mot de pass')
 
 @section('content')
 <div class="container">

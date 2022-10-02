@@ -23,7 +23,11 @@ Route::get('/Qui-somme-nous', function () {
 
 Route::get('/contact', function () {
     return view('front_end/pages/contact');
-});
+})->name('contact');
+Route::get('/packs', function () {
+    return view('front_end/pages/packs');
+})->name('packs');;
+
 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
@@ -35,3 +39,10 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::resource('products','ProductController');
 
 });
+Route::get('logout', function ()
+{
+    auth()->logout();
+    Session()->flush();
+
+    return Redirect::to('/');
+})->name('logout');
