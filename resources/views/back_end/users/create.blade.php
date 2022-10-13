@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('back_end.layouts.app')
 
 
 
@@ -10,15 +10,11 @@
 
         <div >
 
-            <h2>Create New User</h2>
+            <h2>Créer un utilisateur</h2>
 
         </div>
 
-        <div >
-
-            <a  href="{{ route('users.index') }}"> Back</a>
-
-        </div>
+       
 
     </div>
 
@@ -29,11 +25,7 @@
 @if (count($errors) > 0)
 
   <div >
-
-    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-
     <ul>
-
        @foreach ($errors->all() as $error)
 
          <li>{{ $error }}</li>
@@ -41,7 +33,6 @@
        @endforeach
 
     </ul>
-
   </div>
 
 @endif
@@ -51,23 +42,15 @@
 
 {!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
 
-<div >
+<div class="container">
 
-    <div >
+    <div class="row">
 
-        <div >
-
+        <div class="col-md-6" >
             <strong>Name:</strong>
-
             {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-
         </div>
-
-    </div>
-
-    <div >
-
-        <div >
+        <div class="col-md-6" >
 
             <strong>Email:</strong>
 
@@ -76,22 +59,16 @@
         </div>
 
     </div>
+    <div class="row">
 
-    <div >
-
-        <div >
+        <div class="col-md-6">
 
             <strong>Password:</strong>
 
             {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
 
         </div>
-
-    </div>
-
-    <div >
-
-        <div >
+        <div class="col-md-6" >
 
             <strong>Confirm Password:</strong>
 
@@ -99,11 +76,13 @@
 
         </div>
 
+
     </div>
 
-    <div >
 
-        <div >
+    <div class="row">
+
+        <div class="col-md-12">
 
             <strong>Role:</strong>
 
@@ -112,19 +91,20 @@
         </div>
 
     </div>
+    <hr>
+    <div class="row">
 
-    <div >
-
-        <button type="submit" >Submit</button>
-
+        <div class="col-md-6">
+            <button class="btn btn-primary" type="submit" >Submit</button>
+        </div>
     </div>
-
+    
 </div>
 
 {!! Form::close() !!}
 
 
 
-<p ><small>Tutorial by ItSolutionStuff.com</small></p>
+
 
 @endsection

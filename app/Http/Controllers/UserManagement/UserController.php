@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\User;
 use SpatiePermissionModelsRole;
+use Illuminate\Support\Arr;
 use DB;
 use Hash;
+use View;
 
 class UserController extends Controller
 {
@@ -26,7 +28,7 @@ class UserController extends Controller
 
     {
 
-        $data = User::orderBy('id','DESC')->paginate(5);
+        $data = User::orderBy('id','DESC')->paginate(10);
 
         return view('back_end.users.index',compact('data'))
 
@@ -50,7 +52,7 @@ class UserController extends Controller
 
         $roles = Role::pluck('name','name')->all();
 
-        return view('users.create',compact('roles'));
+        return view('back_end.users.create',compact('roles'));
 
     }
 
@@ -90,7 +92,7 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')
+        return redirect()->route('back_end.users.index')
 
                         ->with('success','User created successfully');
 
@@ -114,7 +116,7 @@ class UserController extends Controller
 
         $user = User::find($id);
 
-        return view('users.show',compact('user'));
+        return view('back_end.users.show',compact('user'));
 
     }
 
@@ -135,12 +137,13 @@ class UserController extends Controller
     {
 
         $user = User::find($id);
+    
 
         $roles = Role::pluck('name','name')->all();
 
         $userRole = $user->roles->pluck('name','name')->all();
 
-        return view('users.edit',compact('user','roles','userRole'));
+        return  View::make('back_end.users.edit',compact('user','roles','userRole'));
 
     }
 
@@ -182,7 +185,7 @@ class UserController extends Controller
 
         }else{
 
-            $input = array_except($input,array('password'));
+            $input = Arr::except($input,array('password'));
 
         }
 
@@ -191,7 +194,8 @@ class UserController extends Controller
         $user->update($input);
 
         DB::table('model_has_roles')->where('model_id',$id)->delete();
-
+       
+    
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
@@ -220,7 +224,7 @@ class UserController extends Controller
 
         return redirect()->route('users.index')
 
-                        ->with('success','User deleted successfully');
+                        ->with('success','un untilisateur supprimé');
 
     }
 }

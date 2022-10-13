@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('back_end.layouts.app')
 
 
 
@@ -6,17 +6,17 @@
 
 <div >
 
-    <div >
+    <div class="row" >
 
-        <div >
+        <div class="col-md-9" >
 
-            <h2>Users Management</h2>
+            <h2> Gestion Utilisateurs</h2>
 
         </div>
 
-        <div >
+        <div class="col-md-3">
 
-            <a  href="{{ route('users.create') }}"> Create New User</a>
+            <a class="btn btn-success"  href="{{ route('users.create') }}"> <i class="fa-solid fa-plus"></i> Créer</a>
 
         </div>
 
@@ -26,11 +26,12 @@
 
 
 
+
 @if ($message = Session::get('success'))
 
 <div >
 
-  <p>{{ $message }}</p>
+  <span class="alert alert-success">{{ $message }}</span>
 
 </div>
 
@@ -38,7 +39,7 @@
 
 
 
-<table >
+<table class="table" >
 
  <tr>
 
@@ -80,13 +81,13 @@
 
     <td>
 
-       <a  href="{{ route('users.show',$user->id) }}">Show</a>
+       <a class="btn btn-sm btn-info"  data-toggle="modal" data-target="#showuser" ><i class="fa-regular fa-eye"></i></a>
 
-       <a  href="{{ route('users.edit',$user->id) }}">Edit</a>
+       <a class="btn btn-sm btn-warning"  href="{{ route('users.edit',$user->id) }}"><i class="fa-regular fa-pen-to-square"></i></a>
 
         {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
 
-            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+        {{ Form::button('<i class="fa-solid fa-trash"></i>', ['class' => 'btn btn-danger btn-sm', 'type' => 'submit']) }}
 
         {!! Form::close() !!}
 
@@ -99,11 +100,13 @@
 </table>
 
 
+<div class="text-right">
+  {!! $data->render() !!}
+</div>
 
-{!! $data->render() !!}
 
 
 
-<p ><small>Tutorial by ItSolutionStuff.com</small></p>
+
 
 @endsection

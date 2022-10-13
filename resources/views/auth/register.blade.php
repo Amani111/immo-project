@@ -32,7 +32,12 @@
         <div class="page-section mb-50 reg" style="padding-bottom: 55px;">
             <div class="container" >
                 <div class="row ">
+                  
                     <div class=" col-9 col-sm-12 col-md-6 col-lg-8 col-xs-12" >
+                        <div class="flash">
+                            @include('front_end.layouts.flash')
+                            @yield('content')
+                        </div>
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="login-form">

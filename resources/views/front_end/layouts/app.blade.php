@@ -29,10 +29,7 @@
   
   
     @include('front_end.includes.header')
-    <div class="flash">
-        @include('flash-message')
-        @yield('content')
-    </div>
+   
     @yield('content')
     @include('front_end.includes.footer')
 	<!-- scroll to top  -->

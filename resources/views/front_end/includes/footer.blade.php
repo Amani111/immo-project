@@ -106,7 +106,9 @@
                     <!--=======  footer copyright text  =======-->
 
                     <div class="footer-copyright-text">
-                        <p>Copyright &copy; 2022 <a href="#"></a>, All Rights Reserved.</p>
+                        <p>Copyright &copy; <script>
+                            document.write(new Date().getFullYear())
+                          </script> <a href="#"></a>, All Rights Reserved.</p>
                     </div>
 
                     <!--=======  End of footer copyright text  =======-->

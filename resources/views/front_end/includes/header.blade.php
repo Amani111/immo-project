@@ -219,7 +219,7 @@
 								<ul>
 									<li class="active"><a href="#">ACCUEIL</a></li>
 									<li><a href="#">STE</a></li>
-									<li><a href="{{route('packs')}}">PACKS</a></li>
+									<li><a href="{{route('pack')}}">PACKS</a></li>
 									<li><a href="{{route('contact')}}">CONTACT</a></li>
 								</ul>
 							</nav>

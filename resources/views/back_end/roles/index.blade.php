@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('back_end.layouts.app')
 
 
 
@@ -10,7 +10,7 @@
 
         <div >
 
-            <h2>Role Management</h2>
+            <h2>Gestion Des  Roles </h2>
 
         </div>
 
@@ -18,7 +18,7 @@
 
         @can('role-create')
 
-            <a  href="{{ route('roles.create') }}"> Create New Role</a>
+            <a  href="{{ route('roles.create') }}"> Créer un Role</a>
 
             @endcan
 
