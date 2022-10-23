@@ -14,33 +14,52 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 //home page
-Route::get('/','HomeController@index');
+Route::get('/','HomeController@index')->name('/');
 //pack 
 Route::get('/pack','HomeController@pack')->name('pack');
+Route::get('{id}/produits','HomeController@productwithcategory')->name('productwithcategory');
+Route::get('showroom-tunimeuble','HomeController@showrooms')->name('showroomstuni');
+Route::get('{id}/liste-showroom-tunimeuble','HomeController@listeshowrooms')->name('listeshowrooms');
+Route::get('{id}/showroom-meuble','HomeController@singlehowrooms')->name('singleshowroomstuni');
+Route::get('{id}/produit-meuble','HomeController@singleproduct')->name('singleproduct');
+Route::get('/search', 'HomeController@search')->name('search');
+Route::get('/contact', 'HomeController@contact')->name('contact');
+Route::post('contact/send', 'HomeController@send')->name('contact.send');
 
+
+//register
+Route::get('/register', 'Auth\LoginController@create')->name('register');
+Route::post('register', 'Auth\LoginController@store')->name('registeruser');
+Route::get('login', 'Auth\LoginController@viewlogin')->name('login');
+Route::post('registerlogin', 'Auth\LoginController@login')->name('registerlogin');
 Route::get('/Qui-somme-nous', function () {
-    return view('front_end/pages/aboutus');
+  return view('front_end/pages/aboutus');
 });
 
-Route::get('/contact', function () {
-    return view('front_end/pages/contact');
-})->name('contact');
-
-
-
-Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
-    Route::resource('roles','UserManagement\RoleController');
-  Route::resource('users','UserManagement\UserController');
   Route::get('dashboard','backend\DashboardController@index')->name('dashboard');
-  Route::resource('packs', 'backend\PackController');
-  Route::resource('showrooms', 'backend\ShowroomController');
-  Route::get('logout', function ()
-{
-    auth()->logout();
-    Session()->flush();
-    return Redirect()->route('/');
-})->name('logout');
-
+    Route::get('logout', function ()
+  {    auth()->logout();
+      Session()->flush();
+      return Redirect()->route('/');
+  })->name('logout');
 });
 
+//** for admin user */
+Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {
+  Route::get('dashboard','backend\DashboardController@index')->name('dashboard');
+  Route::resource('users','UserManagement\UserController');
+  Route::resource('categories', 'backend\CategoryController');
+  Route::resource('roles','UserManagement\RoleController');
+  Route::post('pack/register','UserManagement\UserController@registerpack')->name('registerpack');
+  Route::resource('packs', 'backend\PackController');
+  Route::resource('souscategory', 'backend\SouscategoryController');
+});
+
+
+//*** for user auth */
+Route::group(['prefix' => 'admin', 'middleware' => ['role:user']], function() {
+  Route::get('dashboard','backend\DashboardController@index')->name('dashboard');
+  Route::resource('showrooms', 'backend\ShowroomController');
+  Route::resource('products', 'backend\ProductController');
+});

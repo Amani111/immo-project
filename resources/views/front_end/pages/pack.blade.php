@@ -17,7 +17,7 @@
                     <div class="breadcrumb-container">
                         <nav>
                             <ul>
-                                <li class="parent-page"><a href="index.html">Accueil</a></li>
+                                <li class="parent-page"><a href="{{route('/')}}">Accueil</a></li>
                                 <li>Packs</li>
                             </ul>
                         </nav>
@@ -55,9 +55,15 @@
 					<div class="single-blog-post-content">
 						<h3 class="post-title"> <a href="#"> {{$pack->title}}</a></h3>
 						<div class="post-meta">
-							<p><span></span> <a href="#"></a> <span
-									class="separator">|</span> <span><i class="fa fa-calendar"></i> <a href="#"></a>{{$pack->created_at}}</span></p>
+							<p><span></span> <a href="#"></a> <span><i class="fa fa-calendar"></i> <a href="#"></a>{{$pack->duree}} </span></p>
 						</div>
+						<div class="post-meta">
+							<p><span></span> <a href="#">Prix :</a>  {{$pack->prix}}(DT)</p>
+						</div>
+						<div class="post-meta">
+							<p><span></span> <a href="#">Nombre des produits :</a> <span><a href="#"></a>{{$pack->nb_picture}}</span></p>
+						</div>
+
 
 						<p class="post-excerpt">
 							{{$pack->description}}.

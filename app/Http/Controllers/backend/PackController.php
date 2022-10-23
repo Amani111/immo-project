@@ -46,6 +46,9 @@ class PackController extends Controller
             'title' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required',
+            'nb_picture' => 'required',
+            'duree' => 'required',
+            'prix' => 'required',
             ]);
             if ($files = $request->file('image')) {
                 $destinationPath = 'public/image/'; // upload path
@@ -57,6 +60,9 @@ class PackController extends Controller
             $insert['title'] = $request->get('title');
             $insert['user_id'] = Auth::user()->id;
             $insert['description'] = $request->get('description');
+            $insert['nb_picture'] = $request->get('nb_picture');
+            $insert['duree'] = $request->get('duree');
+            $insert['prix'] = $request->get('prix');
             Pack::insert($insert);
             return Redirect()->route('packs.index')
                 ->with('success','Une pack est créer');
@@ -99,6 +105,10 @@ class PackController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'description' => 'required',
+            'nb_picture' => 'required',
+            'duree' => 'required',
+            'prix' => 'required',
             ]);
             $update = ['title' => $request->title, 'description' => $request->description];
             if ($files = $request->file('image')) {
@@ -109,6 +119,9 @@ class PackController extends Controller
             }
             $update['title'] = $request->get('title');
             $update['description'] = $request->get('description');
+            $update['nb_picture'] = $request->get('nb_picture');
+            $update['duree'] = $request->get('duree');
+            $update['prix'] = $request->get('prix');
         
             Pack::where('id',$id)->update($update);
             return Redirect()->route('packs.index')

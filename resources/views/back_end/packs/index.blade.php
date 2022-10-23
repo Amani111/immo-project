@@ -27,14 +27,10 @@
 
 
 
-@if ($message = Session::get('success'))
-
-<div >
-
-  <span class="alert alert-success">{{ $message }}</span>
-
+@if(Session::has('message'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ Session::get('message') }}
 </div>
-
 @endif
 
 

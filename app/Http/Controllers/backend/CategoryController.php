@@ -4,6 +4,8 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Category;
+use App\Souscategory;
 
 class CategoryController extends Controller
 {
@@ -12,9 +14,13 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = Category::orderBy('id','DESC')->paginate(7);
+
+        return view('back_end.categories.index',compact('data'))
+
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('back_end.categories.create');
     }
 
     /**
@@ -35,7 +41,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+        ]);
+        Category::create([
+            'name' => $request->name,
+            'slug' => \Str::slug($request->slug)
+        ]);
+
+        return Redirect()->route('categories.index')
+        ->with('message','Une categorie a  créer');
+        
     }
 
     /**
@@ -46,7 +63,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+       // return view('back_end.categories.show');
     }
 
     /**
@@ -57,7 +74,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        $souscategory = Souscategory::all()->where('category_id',$id);
+        return view('back_end.categories.edit',compact('category','souscategory'));
     }
 
     /**
@@ -69,7 +88,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+        ]);
+            $update = ['name' => $request->name, 'slug' => $request->slug];
+        
+            $update['name'] = $request->get('name');
+            $update['slug'] = $request->get('slug');
+        
+            Category::where('id',$id)->update($update);
+            return Redirect()->route('categories.index')
+            ->with('message','categorie a eté modifié');
     }
 
     /**
@@ -80,6 +110,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category =  Category::find($id)->delete();
+
+        return redirect()->route('categories.index')
+
+         ->with('message','une categorie a supprimé');
     }
 }

@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -41,6 +43,10 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+
+    public function viewlogin(){
+        return view('auth.login');
+    }
     
     /**
      * login
@@ -89,5 +95,30 @@ class LoginController extends Controller
         $request->session()->invalidate();
 
         return redirect()->route('/');
+    }
+///view register
+    public function create()
+    {
+        return view('auth.register');
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request,[
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        
+        $user= User::create([
+            'name' => $request['name'],
+            'phone' => $request['phone'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'active' =>'0',
+        ]);
+        
+        return redirect()->back()->with('success','vérifier votre courrier  et contactez nous pour activé votre compte !');;
     }
 }

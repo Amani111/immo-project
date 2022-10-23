@@ -78,6 +78,23 @@
 
 
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <strong>Telephone:</strong>
+
+            {!! Form::text('phone', null, array('placeholder' => 'telephone','class' => 'form-control')) !!}
+
+        </div>
+        <div class="col-md-6">
+
+            <strong>statut:</strong>
+
+            <select name="active" id="active" class="form-control">
+                <option value="1">active</option>
+                <option value="0">désactive</option>
+            </select>
+        </div>
+    </div>
 
 
     <div class="row">
@@ -86,9 +103,10 @@
 
             <strong>Role:</strong>
 
-            {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
+            {!! Form::select('roles[]', $roles,[], array('class' => 'form-control')) !!}
 
         </div>
+  
 
     </div>
     <hr>

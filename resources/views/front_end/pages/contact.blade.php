@@ -17,7 +17,7 @@
                     <div class="breadcrumb-container">
                         <nav>
                             <ul>
-                                <li class="parent-page"><a href="index.html">Accueil</a></li>
+                                <li class="parent-page"><a href="{{route('/')}}">Accueil</a></li>
                                 <li>Contact</li>
                             </ul>
                         </nav>

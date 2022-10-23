@@ -80,7 +80,8 @@ class UserController extends Controller
 
             'password' => 'required|same:confirm-password',
 
-            'roles' => 'required'
+            'roles' => 'required',
+            'active' =>'required'
 
         ]);
 
@@ -92,12 +93,14 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('back_end.users.index')
+        return redirect()->route('users.index')
 
                         ->with('success','User created successfully');
 
     }
 
+
+   
     /**
 
      * Display the specified resource.
@@ -173,7 +176,8 @@ class UserController extends Controller
 
             'password' => 'same:confirm-password',
 
-            'roles' => 'required'
+            'roles' => 'required',
+            'active'=> 'required',
 
         ]);
 

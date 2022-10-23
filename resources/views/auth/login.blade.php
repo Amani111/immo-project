@@ -39,7 +39,7 @@
                     @yield('content')
                 </div>
                 <!-- Login Form s-->
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('registerlogin') }}">
                     @csrf
                     <div class="login-form">
                         <h4 class="login-title">Login</h4>

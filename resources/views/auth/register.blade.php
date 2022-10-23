@@ -38,7 +38,7 @@
                             @include('front_end.layouts.flash')
                             @yield('content')
                         </div>
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('registeruser') }}">
                             @csrf
                             <div class="login-form">
                                 <h4 class="login-title">Register</h4>

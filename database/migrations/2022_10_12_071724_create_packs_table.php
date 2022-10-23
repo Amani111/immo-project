@@ -19,6 +19,9 @@ class CreatePacksTable extends Migration
             $table->integer('user_id'); 
             $table->text('image');  
             $table->text('description'); 
+            $table->string('duree');
+            $table->integer('nb_picture');
+            $table->double('prix');
             $table->timestamps();
         });
     }

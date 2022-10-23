@@ -81,11 +81,23 @@
   
     <div class="row">
 
-        <div class="col-md-12" >
+        <div class="col-md-6" >
 
             <strong>Role:</strong>
 
-            {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
+            {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control')) !!}
+
+        </div>
+        <div class="col-md-6">
+
+            <strong>modifier statut:</strong>
+
+            <select name="active" id="active" class="form-control">
+                <option value="1">active</option>
+                <option value="0">désactive</option>
+            </select>
+
+          
 
         </div>
     </div>

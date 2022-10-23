@@ -38,25 +38,25 @@
 	<!-- JS
 	============================================ -->
 	<!-- Modernizer JS -->
-	<script src="{{('front-end/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+	<script src="{{asset('front-end/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 
 	<!-- jQuery JS -->
-	<script src="{{('front-end/js/vendor/jquery.min.js')}}"></script>
+	<script src="{{asset('front-end/js/vendor/jquery.min.js')}}"></script>
 
 	<!-- jQuery Migrate -->
-	<script src="{{('front-end/js/vendor/jquery-migrate-3.3.2.min.js')}}"></script>
+	<script src="{{asset('front-end/js/vendor/jquery-migrate-3.3.2.min.js')}}"></script>
 
 	<!-- Popper JS -->
-	<script src="{{('front-end/js/popper.min.js')}}"></script>
+	<script src="{{asset('front-end/js/popper.min.js')}}"></script>
 
 	<!-- Bootstrap JS -->
-	<script src="{{('front-end/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('front-end/js/bootstrap.min.js')}}"></script>
 
 	<!-- Plugins JS -->
-	<script src="{{('front-end/js/plugins.js')}}"></script>
+	<script src="{{asset('front-end/js/plugins.js')}}"></script>
 
 	<!-- Main JS -->
-	<script src="{{('front-end/js/main.js')}}"></script>
+	<script src="{{asset('front-end/js/main.js')}}"></script>
 </body>
 
 

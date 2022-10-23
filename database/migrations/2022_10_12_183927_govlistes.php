@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Govliste extends Migration
+class Govlistes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Govliste extends Migration
      */
     public function up()
     {
-        Schema::create('govliste', function (Blueprint $table) {
+        Schema::create('govlistes', function (Blueprint $table) {
             $table->id();
             $table->string('name'); 
             $table->timestamps();

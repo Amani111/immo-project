@@ -41,7 +41,7 @@
 							<!--=======  single dropdown  =======-->
 
 
-							<div class="single-dropdown">
+							{{-- <div class="single-dropdown">
 								<a href="#" id="changeAccount"><span id="accountMenuName">My Account <i
 											class="fa fa-angle-down"></i></span></a>
 								<div class="language-currency-list hidden" id="accountList">
@@ -52,7 +52,7 @@
 										<li><a href="{{route('logout')}}">Login</a></li>
 									</ul>
 								</div>
-							</div>
+							</div> --}}
 							<!--=======  End of single dropdown  =======-->
 						</div>
 						<!--=======  End of header top dropdowns  =======-->
@@ -160,32 +160,20 @@
 							<!-- Category Menu -->
 							<nav class="category-menu">
 								<ul>
-									<li><a href="shop-left-sidebar.html">Sofas &amp; Chairs</a></li>
-									<li class="menu-item-has-children"><a href="shop-left-sidebar.html">Drawing Room</a>
+									@foreach($category as $data)
+									@if(count($data->souscategories) != 0 )
+									<li class="menu-item-has-children"><a href="{{route('productwithcategory',$data->id)}}">{{$data->name}}</a>
 										<!-- category submenu -->
 										<ul class="category-mega-menu">
-											<li><a href="shop-left-sidebar.html">Sofas</a></li>
-											<li><a href="shop-left-sidebar.html">Armchairs</a></li>
-											<li><a href="shop-left-sidebar.html">Dining Chairs &amp; Benches</a></li>
-											<li><a href="shop-left-sidebar.html">Desk Chairs</a></li>
+											@foreach($data->souscategories as $cat)
+											<li><a href="#">{{$cat->name}}</a></li>
+											@endforeach
 										</ul>
 									</li>
-									<li class="menu-item-has-children"><a href="shop-left-sidebar.html">Dinning Room</a>
-										<!-- category submenu -->
-										<ul class="category-mega-menu">
-											<li><a href="shop-left-sidebar.html">Sofas</a></li>
-											<li><a href="shop-left-sidebar.html">Armchairs</a></li>
-											<li><a href="shop-left-sidebar.html">Dining Chairs &amp; Benches</a></li>
-											<li><a href="shop-left-sidebar.html">Desk Chairs</a></li>
-										</ul>
-									</li>
-									<li><a href="shop-left-sidebar.html">Out Door Room</a></li>
-									<li><a href="shop-left-sidebar.html">Room living</a></li>
-									<li><a href="shop-left-sidebar.html">Estilo</a></li>
-									<li><a href="shop-left-sidebar.html">Living Chairs</a></li>
-									<li class="hidden"><a href="shop-left-sidebar.html">New Sofas</a></li>
-									<li class="hidden"><a href="shop-left-sidebar.html">Sleight Sofas</a></li>
-									<li><a href="#" id="more-btn">... More</a></li>
+									@else
+										<li><a href="{{route('productwithcategory',$data->id)}}">{{$data->name}}</a></li>
+									@endif
+									@endforeach
 								</ul>
 							</nav>
 						</div>
@@ -196,7 +184,7 @@
 
 						<div class="sticky-logo">
 							<a href="index.html">
-								<img width="186" height="53"  src="{{('front-end/images/logo.webp')}}" class="img-fluid" alt="">
+								<img width="186" height="53"  src="{{asset('front-end/images/logo.webp')}}" class="img-fluid" alt="">
 							</a>
 						</div>
 
@@ -212,26 +200,30 @@
 
 						<!--=======  End of search icon for tablet  =======-->
 					</div>
-					<div class="col-12 col-lg-4">
+					<div class="col-12 col-lg-5">
 						<!-- navigation section -->
 						<div class="main-menu">
 							<nav>
 								<ul>
-									<li class="active"><a href="#">ACCUEIL</a></li>
-									<li><a href="#">STE</a></li>
-									<li><a href="{{route('pack')}}">PACKS</a></li>
-									<li><a href="{{route('contact')}}">CONTACT</a></li>
+									<li class="{{request()->is('/') ? 'active' : '' }}"><a href="{{route('/')}}">ACCUEIL</a></li>
+									<li class=""><a href="#">STE</a></li>
+									<li class="{{ request()->is('showroomstuni*') ? 'active' : '' }}"><a href="{{route('showroomstuni')}}">Showroom</a></li>
+									<li class="{{ request()->is('pack*') ? 'active' : '' }}"><a href="{{route('pack')}}">PACKS</a></li>
+									<li class="{{request()->is('contact') ? 'active' : '' }}" ><a href="{{route('contact')}}">CONTACT</a></li>
 								</ul>
 							</nav>
 						</div>
 						<!-- end of navigation section -->
 					</div>
-					<div class="col-12 col-lg-4">
+					<div class="col-12 col-lg-3">
 						<!--=======  navigation search bar  =======-->
 
 						<div class="navigation-search d-none d-lg-block">
-							<input type="search" placeholder="Search product ...">
-							<button><i class="icon ion-md-search"></i></button>
+							<form action="{{ route('search') }}" method="GET">
+								<input type="search" name="search" placeholder="Search product ..." required/>
+								<button type="submit"><i class="icon ion-md-search"></i></button>
+							</form>
+						
 						</div>
 
 						<!--=======  End of navigation search bar  =======-->
