@@ -107,7 +107,7 @@ class SouscategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deletesouscategory($id)
     {
          $souscategory=Souscategory::find($id);
         $category_id =$souscategory->category_id;

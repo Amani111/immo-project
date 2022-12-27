@@ -71,8 +71,8 @@
                             </td>
                             <td>
                                 <a class="btn btn-sm btn-warning"  href="{{ route('souscategory.edit',$array->id) }}"><i class="fa-regular fa-pen-to-square"></i></a>
-{{-- 
-                                <a class="btn btn-sm btn-danger"  href="{{ route('souscategory.destroy',$array->id) }}"><i class="fa-solid fa-trash"></i></i></a> --}}
+
+                                <a class="btn btn-sm btn-danger"  href="{{ route('deletesouscategory',$array->id) }}"><i class="fa-solid fa-trash"></i></i></a>
 
                          
                             </td>
@@ -87,7 +87,7 @@
 <hr>
     <div class="row" >
         <div class="col-md-6">
-            <button class="btn btn-primary" type="submit" >Submit</button>
+            <button class="btn btn-primary" type="submit" >Modifier</button>
         </div>
     </div>
 </div>

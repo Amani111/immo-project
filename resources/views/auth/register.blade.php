@@ -28,20 +28,21 @@
     {{-- <link rel="stylesheet" type="text/css" href="{{asset('front-end/css/register.css')}}"> --}}
 
 </head>
-<body style="background-image: url({{('front-end/images/backgrounds/bg1.webp')}})">
-        <div class="page-section mb-50 reg" style="padding-bottom: 55px;">
+<body style="background-image: url({{('front-end/images/backgrounds/bb3.jpg')}});  background-size: cover;background-repeat: no-repeat;">
+   
+        <div class="page-section mb-50 reg">
             <div class="container" >
                 <div class="row ">
-                  
-                    <div class=" col-9 col-sm-12 col-md-6 col-lg-8 col-xs-12" >
+                    <div class="col-9 col-sm-12 col-md-12 col-xs-12 col-lg-10 mb-30" style="margin-left: 100px !important">
                         <div class="flash">
                             @include('front_end.layouts.flash')
                             @yield('content')
                         </div>
-                        <form method="POST" action="{{ route('registeruser') }}">
+                        <form method="POST" action="{{ route('registeruser') }}" >
                             @csrf
                             <div class="login-form">
-                                <h4 class="login-title">Register</h4>
+                                <input type="text" id="pack_id" name="pack_id" value="{{$pack_id}}" hidden>
+                                <h4 class="title">Merci de bien vouloir compléter le formulaire suivant, pour que nous puissions vous contacter</h4>
 
                                 <div class="row">
                                     <div class="col-md-6 col-12 mb-20">
@@ -62,6 +63,26 @@
                                             </span>
                                          @enderror
                                     </div>
+                                    
+                                    <div class="col-md-6 col-12 mb-20">
+                                        <label for="facebook">lien page facebook</label>
+                                        <input class="mb-0 @error('facebook') is-invalid @enderror" type="text" placeholder="facebook" id="facebook"    name="facebook" value="{{ old('facebook') }}"  autocomplete="facebook" autofocus>
+                                        @error('facebook')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                         @enderror
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-20">
+                                        <label for="siteweb">Site web</label>
+                                        <input class="mb-0 @error('siteweb') is-invalid @enderror" type="url" placeholder="siteweb" id="siteweb"    name="siteweb" value="{{ old('siteweb') }}"  autocomplete="siteweb" autofocus>
+                                        @error('siteweb')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                         @enderror
+                                    </div>
+                                  
                                     <div class="col-md-12 mb-20">
                                         <label for="email">Email *</label>
                                         <input class="mb-0 @error('email') is-invalid @enderror" type="email" placeholder="Address Email" id="email" type="email"  name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -84,18 +105,27 @@
                                         <label for="password-confirm" >Confirmer Password *</label>
                                         <input class="mb-0" type="password" placeholder="Confirmer Password" id="password-confirm" type="password"  name="password_confirmation" required autocomplete="new-password">
                                     </div>
+                                    <div class="col-md-12 col-12 mb-20">
+                                        <label for="Adresse">Adresse</label>
+                                        <textarea class="form-control mb-0 @error('Adresse') is-invalid @enderror" type="text" placeholder="votre adresse" id="Adresse"    name="Adresse" value="{{ old('Adresse') }}" required autocomplete="Adresse" autofocus></textarea>
+                                        @error('Adresse')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                         @enderror
+                                    </div>
                                     <div class="col-md-6 mb-20">
+                                        <p></p>
                                         <a href="{{route('login')}}">J'ai déja un compte</a>
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" class="register-button mt-0">{{ __('Register') }}</button>
+                                        <button type="submit" class="register-button mt-0">Envoyer</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <div class="col-3" style="background-image: url({{('front-end/images/products/tab-product02.webp')}})">
-                    </div>
+                
                 </div>
             </div>
         </div>

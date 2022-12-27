@@ -16,7 +16,8 @@ class ShowroomController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Showroom::orderBy('id','DESC')->paginate(7);
+        $id_user = Auth::user()->id;
+        $data = Showroom::orderBy('id','DESC')->where('user_id' ,$id_user)->paginate(7);
 
         return view('back_end.showrooms.index',compact('data'))
 
@@ -44,22 +45,43 @@ class ShowroomController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'vedio' => 'mimes:mp4,mov,ogg | max:30000',
+            'video' => 'mimes:mp4,mov,ogg | max:90000',
             'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'telephone' => 'required',
             'govliste_id' => 'required',
             'code_postal' => 'required',
+            ],[
+
+                'name.required'    => 'le champ nom est obligatoire!',
+                'video.mimes'      => 'remplire le champ par un video!',
+                'video.max'      => 'video de taille inférieur svp!',
+                'image.required'      => 'le champ image est obligatoire',
+                'image.mimes'      => 'remplire le champ par image',
+                'image.max'      => 'remplire le champ par image de taille inférieur',
+                'description.required' => 'le champ description est obligatoire!',
+                'telephone.required'      => 'Saisie votre numero de télephone!',
+                'govliste_id.required'      => 'Choisie une ville!',
+                'code_postal.required'      => 'le champ code postal est obligatoire!',
+
             ]);
-            if ($files = $request->file('vedio')) {
-                $destinationPath = 'public/vedio/'; // upload path
-                $profilevedio = date('YmdHis') . "." . $files->getClientOriginalExtension();
-                $files->move($destinationPath, $profilevedio);
-                $insert['vedio'] = "$profilevedio";
+            if ($files = $request->file('video')) {
+                $destinationPath = 'public/showroom/video/'; // upload path
+                $profilevideo = date('YmdHis') . "." . $files->getClientOriginalExtension();
+                $files->move($destinationPath, $profilevideo);
+                $insert['video'] = "$profilevideo";
+            }
+            if ($files = $request->file('image')) {
+                $destinationPath = 'public/showroom/image/'; // upload path
+                $showroomimage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+                $files->move($destinationPath, $showroomimage);
+                $insert['image'] = "$showroomimage";
             }
 
             $insert['name'] = $request->get('name');
             $insert['telephone'] = $request->get('telephone');
-        
+            $insert['facebook'] = $request->get('facebook');
+            $insert['instagram'] = $request->get('instagram');
             $insert['code_postal'] = $request->get('code_postal');
             $insert['address'] = $request->get('address');
             $insert['lat'] = $request->get('lat');
@@ -70,7 +92,7 @@ class ShowroomController extends Controller
             
             $show =Showroom::insert($insert);
             return Redirect()->route('showrooms.index')
-                ->with('success','Une showroom a créer');
+                ->with('message','Une showroom a créer');
     }
 
     /**
@@ -109,24 +131,43 @@ class ShowroomController extends Controller
      */
     public function update(Request $request, $id)
     {
+       
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'telephone' => 'required',
             'govliste_id' => 'required',
             'code_postal' => 'required',
+            'description' => 'required',
+            ],[
+
+                'name.required'    => 'le champ nom est obligatoire!',
+                'description.required' => 'le champ description est obligatoire!',
+                'telephone.required'      => 'Saisie votre numero de télephone!',
+                'govliste_id.required'      => 'Choisie une ville!',
+                'code_postal.required'      => 'le champ code postal est obligatoire!',
+
             ]);
            
-            if ($files = $request->file('vedio')) {
-            $destinationPath = 'public/vedio/'; // upload path
-            $profilevedio = date('YmdHis') . "." . $files->getClientOriginalExtension();
-            $files->move($destinationPath, $profilevedio);
-            $update['vedio'] = "$profilevedio";
+            if ($files = $request->file('video')) {
+                $destinationPath = 'public/showroom/video/'; // upload path
+                $profilevideo = date('YmdHis') . "." . $files->getClientOriginalExtension();
+                $files->move($destinationPath, $profilevideo);
+                $insert['video'] = "$profilevideo";
+            }
+
+            if ($files = $request->file('image')) {
+                $destinationPath = 'public/showroom/image/'; // upload path
+                $showroomimage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+                $files->move($destinationPath, $showroomimage);
+                $update['image'] = "$showroomimage";
             }
 
             $update['name'] = $request->get('name');
             $update['telephone'] = $request->get('telephone');
             $update['govliste_id'] = $request->get('govliste_id');
+            $update['facebook'] = $request->get('facebook');
+            $update['instagram'] = $request->get('instagram');
             $update['code_postal'] = $request->get('code_postal');
             $update['address'] = $request->get('address');
             $update['lat'] = $request->get('lat');
@@ -135,7 +176,7 @@ class ShowroomController extends Controller
             $update['description'] = $request->get('description');
             Showroom::where('id',$id)->update($update);
             return Redirect()->route('showrooms.index')
-            ->with('success','showroom a eté modifié');
+            ->with('message','le showroom a été modifié');
     }
 
     /**
@@ -148,7 +189,7 @@ class ShowroomController extends Controller
     {
         Showroom::find($id)->delete();
         return redirect()->route('showrooms.index')
-                        ->with('success','showroom à supprimé');
+                        ->with('message','showroom à supprimé');
         
     }
 }

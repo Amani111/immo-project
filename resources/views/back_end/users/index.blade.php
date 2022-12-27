@@ -18,14 +18,10 @@
 
 
 
-@if ($message = Session::get('success'))
-
-<div >
-
-  <span class="alert alert-success">{{ $message }}</span>
-
-</div>
-
+@if(Session::has('message'))
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ Session::get('message') }}
+  </div>
 @endif
 
 
@@ -38,6 +34,7 @@
       <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Email</th>
       <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Active</th>
       <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">Roles</th>
+      <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">Password</th>
       <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">Action</th>
     </tr>
   </thead>
@@ -75,7 +72,7 @@
         @endforeach
       @endif
     </td>
-
+    <td> <a class="btn btn-sm btn-primary"  href="{{ route('users.change',$user->id) }}"><i class="fa-regular fa-pen-to-square"></i></a></td>
     <td>
        {{-- <a class="btn btn-sm btn-info"  data-toggle="modal" data-target="#showuser" ><i class="fa-regular fa-eye"></i></a> --}}
        <a class="btn btn-sm btn-warning"  href="{{ route('users.edit',$user->id) }}"><i class="fa-regular fa-pen-to-square"></i></a>

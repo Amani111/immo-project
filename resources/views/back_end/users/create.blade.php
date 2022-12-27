@@ -5,40 +5,27 @@
 @section('content')
 
 <div >
-
     <div >
-
         <div >
-
             <h2>Créer un utilisateur</h2>
 
         </div>
-
-       
-
     </div>
-
 </div>
 
-
-
-@if (count($errors) > 0)
-
-  <div >
+@if(Session::has('errors'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
     <ul>
-       @foreach ($errors->all() as $error)
-
-         <li>{{ $error }}</li>
-
-       @endforeach
-
+        @foreach ($errors->all() as $error)
+        <li>
+            {{ $error }}  
+        </li>
+        @endforeach
     </ul>
-  </div>
+   
 
+</div>
 @endif
-
-
-
 
 {!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
 
@@ -47,14 +34,30 @@
     <div class="row">
 
         <div class="col-md-6" >
-            <strong>Name:</strong>
+            <strong>Name *:</strong>
             {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
         </div>
         <div class="col-md-6" >
 
-            <strong>Email:</strong>
+            <strong>Email *:</strong>
 
             {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+
+        </div>
+
+    </div>
+    
+    <div class="row">
+
+        <div class="col-md-6" >
+            <strong>lien facebook:</strong>
+            {!! Form::text('facebook', null, array('placeholder' => 'lien facebook ..','class' => 'form-control')) !!}
+        </div>
+        <div class="col-md-6" >
+
+            <strong>lien site web:</strong>
+
+            {!! Form::text('siteweb', null, array('placeholder' => 'lien site web ..','class' => 'form-control')) !!}
 
         </div>
 
@@ -63,14 +66,14 @@
 
         <div class="col-md-6">
 
-            <strong>Password:</strong>
+            <strong>Password *:</strong>
 
             {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
 
         </div>
         <div class="col-md-6" >
 
-            <strong>Confirm Password:</strong>
+            <strong>Confirm Password *:</strong>
 
             {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
 
@@ -80,14 +83,14 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <strong>Telephone:</strong>
+            <strong>Telephone *:</strong>
 
             {!! Form::text('phone', null, array('placeholder' => 'telephone','class' => 'form-control')) !!}
 
         </div>
         <div class="col-md-6">
 
-            <strong>statut:</strong>
+            <strong>statut *:</strong>
 
             <select name="active" id="active" class="form-control">
                 <option value="1">active</option>
@@ -99,11 +102,18 @@
 
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-md-6">
 
-            <strong>Role:</strong>
+            <strong>Role *:</strong>
 
             {!! Form::select('roles[]', $roles,[], array('class' => 'form-control')) !!}
+
+        </div>
+        <div class="col-md-6">
+
+            <strong>Adresse *:</strong>
+
+            {!! Form::textarea('Adresse', null,array('placeholder' => 'votre adresse ...','class' => 'form-control')) !!}
 
         </div>
   
@@ -113,7 +123,7 @@
     <div class="row">
 
         <div class="col-md-6">
-            <button class="btn btn-primary" type="submit" >Submit</button>
+            <button class="btn btn-primary" type="submit" >Créer</button>
         </div>
     </div>
     

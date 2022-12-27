@@ -24,10 +24,88 @@
     <link rel="stylesheet" type="text/css" href="{{asset('front-end/css/main.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('front-end/css/plugins.css')}}">
     @stack('before-styles')
+	<style>
+	.parteunaire-btn {
+    background: #f2f2f2;
+    line-height: 19px;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 3px;
+    font-size: 11px;
+    border: 1px solid #10acb2;
+    background-color: #10acb2;
+    color: #ffffff;
+    text-transform: uppercase;
+	}
+	.parteunaire-btn:hover{
+		color: #ffffff !important;
+		background-color: grey;
+	}
+    .modal-dialog-centered {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+}
+    .modal-dialog {
+    max-width: 700px;
+    width: auto;
+  
+    pointer-events: none;
+}
+.modal-content .modal-header {
+    padding: 0;
+    border: none;
+}
+.modal-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+}
+.modal-content {
+    border: none;
+    position: relative;
+    padding: 0 !important;
+    font-size: 14px;
+    border-radius: 0;
+    -webkit-box-shadow: 0px 10px 34px -15px rgb(0 0 0 / 24%);
+    -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    box-shadow: 0px 10px 34px -15px rgb(0 0 0 / 24%);
+}
+.modal-content button.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+    text-shadow: none;
+    background: #10acb2;
+    color: #fff;
+    opacity: 1;
+}
+    
+
+
+	</style>
 </head>
 <body>
-  
-  
+
     @include('front_end.includes.header')
    
     @yield('content')
@@ -57,6 +135,10 @@
 
 	<!-- Main JS -->
 	<script src="{{asset('front-end/js/main.js')}}"></script>
+
+	@stack('after-scripts')
+	@yield('js') 
+
 </body>
 
 

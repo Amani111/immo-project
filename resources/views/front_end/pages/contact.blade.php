@@ -45,9 +45,9 @@
 
 					<div class="contact-page-side-content">
 						<h3 class="contact-page-title">Contactez Nous</h3>
-						<p class="contact-page-message mb-30">Claritas est etiam processus dynamicus, qui sequitur mutationem
-							consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram anteposuerit
-							litterarum formas human.</p>
+						<p class="contact-page-message mb-30">Vous pouvez vous envoyer un message par le biais de cette page Contact. 
+
+							à votre disposition pour répondre à toutes vos interrogations. </p>
 						<!--=======  single contact block  =======-->
 
 						<div class="single-contact-block">
@@ -81,7 +81,7 @@
 					<!--=======  End of contact page side content  =======-->
 
 				</div>
-				<div class="col-lg-6 col-md-12 order-2 order-lg-1">
+				<div class="col-lg-6 col-md-12 order-2 order-lg-1" style="padding-bottom: 20px !important">
 					<!--=======  contact form content  =======-->
 
 					<div class="contact-form-content">
@@ -98,7 +98,7 @@
 									<input type="email" name="email" id="customerEmail" required>
 								</div>
 								<div class="form-group">
-									<label>Subject</label>
+									<label>objet</label>
 									<input type="text" name="subject" id="contactSubject">
 								</div>
 								<div class="form-group">
@@ -121,7 +121,7 @@
 		=            google map container         =
 		=============================================-->
         <div class="google-map-container mb-45">
-			<div id="google-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.788992264231!2d10.196481514642086!3d36.84752927273498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd352f8b41f7b7%3A0x63a38950ead4c7a9!2sidcom!5e0!3m2!1sfr!2stn!4v1664180635545!5m2!1sfr!2stn" width="1350" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+			<div id="google-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.788992264231!2d10.196481514642086!3d36.84752927273498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd352f8b41f7b7%3A0x63a38950ead4c7a9!2sidcom!5e0!3m2!1sfr!2stn!4v1664180635545!5m2!1sfr!2stn" width="1550" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
 		</div>
 
 		<!--=====  End of google map container  ======-->

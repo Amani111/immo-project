@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Showroom;
 use App\Category;
+use App\Promotion;
 
 class Product extends Model
 {
@@ -13,11 +14,17 @@ class Product extends Model
 
     public function showrooms()
     {
-       return $this->belongsToMany(Showroom::class,'showroom_id');
+       return $this->belongsTo(Showroom::class,'showroom_id');
     }
 
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    
+    public function promotion()
+    {
+        return $this->belongsTo(Promotion::class);
     }
 }

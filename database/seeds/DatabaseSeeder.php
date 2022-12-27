@@ -14,5 +14,8 @@ class DatabaseSeeder extends Seeder
         $this->call(GovlistSeeder::class);
         $this->call(RoleAndPermissionSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(AproposSeeder::class);
+        $this->call(CommentSeeder::class);
+        
     }
 }

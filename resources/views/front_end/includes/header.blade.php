@@ -8,58 +8,6 @@
 		=            header top         =
 		=============================================-->
 
-		<div class="header-top pt-15 pb-15">
-			<div class="container">
-				<div class="row">
-					<div class="col-12 col-lg-6">
-						<div class="header-top-text text-center text-lg-start mb-0 mb-md-15 mb-sm-15">
-							<p><i class="icon ion-md-alarm"></i> Ordered before 17:30, shipped today - <span
-									class="support-no">Support: (012) 800 456 789</span></p>
-						</div>
-					</div>
-					<div class="col-12 col-lg-6">
-						<!--=======  header top dropdowns  =======-->
-
-						<div class="header-top-dropdown d-flex justify-content-center justify-content-lg-end">
-
-
-							<!--=======  single dropdown  =======-->
-
-
-							<!--=======  End of single dropdown  =======-->
-
-							<!--=======  single dropdown  =======-->
-
-
-
-
-
-
-							<!--=======  End of single dropdown  =======-->
-
-
-							<!--=======  single dropdown  =======-->
-
-
-							{{-- <div class="single-dropdown">
-								<a href="#" id="changeAccount"><span id="accountMenuName">My Account <i
-											class="fa fa-angle-down"></i></span></a>
-								<div class="language-currency-list hidden" id="accountList">
-									<ul>
-										<li><a href="cart.html">Cart</a></li>
-										<li><a href="checkout.html">Checkout</a></li>
-										<li><a href="my-account.html">My Account</a></li>
-										<li><a href="{{route('logout')}}">Login</a></li>
-									</ul>
-								</div>
-							</div> --}}
-							<!--=======  End of single dropdown  =======-->
-						</div>
-						<!--=======  End of header top dropdowns  =======-->
-					</div>
-				</div>
-			</div>
-		</div>
 
 		<!--=====  End of header top  ======-->
 
@@ -68,15 +16,15 @@
 		=============================================-->
 
 
-		<div class="navigation-menu-top pt-35 pb-35 pt-md-15 pb-md-15 pt-sm-15 pb-sm-15">
+		<div class="navigation-menu-top pt-35  pt-md-15 pb-md-15 pt-sm-15 pb-sm-15">
 			<div class="container">
 				<div class="row align-items-center">
 					<div class="col-6 col-lg-4 col-md-6 col-sm-6 order-1 order-lg-1">
 						<!--=======  logo  =======-->
 
 						<div class="logo">
-							<a href="index.html">
-								<img width="186" height="53"  src="{{('front-end/images/logo.webp')}}" class="img-fluid" alt="">
+							<a href="{{route('/')}}">
+								<img width="140" height="35"  src="{{asset('front-end/images/LOgo1.png')}}" class="img-fluid"  alt="">
 							</a>
 						</div>
 
@@ -123,10 +71,18 @@
 									<p>l'endroit le plus proche </p>
 								</div>
 							</div>
+							<div class="single-feature d-flex mb-sm-0">
+							
+								<a href="{{route('pack')}}" class="parteunaire-btn">Devenir partenaire</a>
+							</div>
+						
+ 								
+								
+								
+							
 
 							<!--=======  End of single feature  =======-->
-
-
+							
 						</div>
 
 						<!--=======  End of header feature container  =======-->
@@ -147,7 +103,7 @@
 		<div class="navigation-menu">
 			<div class="container">
 				<div class="row align-items-center justify-content-between">
-					<div class="col-12 col-lg-4 col-md-12 col-sm-12 position-relative">
+					<div class="col-12 col-lg-3 col-md-12 col-sm-12 position-relative">
 						<!--=======  category menu  =======-->
 
 						<div class="hero-side-category">
@@ -166,7 +122,7 @@
 										<!-- category submenu -->
 										<ul class="category-mega-menu">
 											@foreach($data->souscategories as $cat)
-											<li><a href="#">{{$cat->name}}</a></li>
+											<li><a href="{{route('productwithsubcategory',$cat->id)}}">{{$cat->name}}</a></li>
 											@endforeach
 										</ul>
 									</li>
@@ -183,8 +139,8 @@
 						<!--=======  sticky logo  =======-->
 
 						<div class="sticky-logo">
-							<a href="index.html">
-								<img width="186" height="53"  src="{{asset('front-end/images/logo.webp')}}" class="img-fluid" alt="">
+							<a href="{{route('/')}}">
+								<img width="135" height="40" src="{{asset('front-end/images/LOgo1-removebg-preview.png')}}" class="img-fluid" alt="">
 							</a>
 						</div>
 
@@ -200,14 +156,15 @@
 
 						<!--=======  End of search icon for tablet  =======-->
 					</div>
-					<div class="col-12 col-lg-5">
+					<div class="col-12 col-lg-7">
 						<!-- navigation section -->
 						<div class="main-menu">
 							<nav>
 								<ul>
 									<li class="{{request()->is('/') ? 'active' : '' }}"><a href="{{route('/')}}">ACCUEIL</a></li>
-									<li class=""><a href="#">STE</a></li>
-									<li class="{{ request()->is('showroomstuni*') ? 'active' : '' }}"><a href="{{route('showroomstuni')}}">Showroom</a></li>
+									<li class="{{ request()->is('showroom-tunimeuble') ? 'active' : '' }}"><a href="{{route('showroomstuni')}}">Showroom</a></li>
+									<li class="{{ request()->is('promotion-tunimeuble') ? 'active' : '' }}"><a href="{{route('promotionstunimeuble')}}">Promotion</a></li>
+									<li class="{{ request()->is('actualite*') ? 'active' : '' }}"><a href="{{route('actualite')}}">Actualité</a></li>
 									<li class="{{ request()->is('pack*') ? 'active' : '' }}"><a href="{{route('pack')}}">PACKS</a></li>
 									<li class="{{request()->is('contact') ? 'active' : '' }}" ><a href="{{route('contact')}}">CONTACT</a></li>
 								</ul>
@@ -215,12 +172,12 @@
 						</div>
 						<!-- end of navigation section -->
 					</div>
-					<div class="col-12 col-lg-3">
+					<div class="col-12 col-lg-1">
 						<!--=======  navigation search bar  =======-->
 
 						<div class="navigation-search d-none d-lg-block">
 							<form action="{{ route('search') }}" method="GET">
-								<input type="search" name="search" placeholder="Search product ..." required/>
+								<input type="search" name="search" placeholder="" required/>
 								<button type="submit"><i class="icon ion-md-search"></i></button>
 							</form>
 						

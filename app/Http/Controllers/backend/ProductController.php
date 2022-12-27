@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\catalog;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Showroom;
+use App\Souscategory;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
@@ -17,9 +19,9 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        $data = Product::orderBy('id','DESC')->paginate(7);
-
+    {   
+        $id_user = Auth::user()->id;
+        $data = Product::orderBy('id','DESC')->where('user_id' ,$id_user)->paginate(7);
         return view('back_end.products.index',compact('data'))
 
             ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -33,9 +35,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-      $showrooms = Showroom::all();
+        $id_user = Auth::user()->id;
+      $showrooms = Showroom::all()->where('user_id' ,$id_user);
       $categories = Category::all();
-        return view('back_end.products.create',compact('showrooms','categories'));
+      $subcategories = Souscategory::all();
+        return view('back_end.products.create',compact('showrooms','categories','subcategories'));
        
     }
 
@@ -47,30 +51,67 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+      
         $request->validate([
             'name' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required',
-            'prix' => 'required',
             'showroom_id' => 'required',
             'category_id' => 'required',
+            ],[
+
+                'name.required'    => 'le champ titre est obligatoire!',
+                'image.required'      => 'choisie une image!',
+                'image.max'      => 'le taille de image doit étre inférieur à 2048!',
+                'image.mimes'      => 'remplire le champ par un image!',
+                'description.required' => 'le champ description est obligatoire!',
+                'showroom_id.required'      => 'Choisie une showroom!',
+                'category_id.required'      => 'choisie une categorie!',
+
             ]);
+         
+            $product = new Product();
             if ($files = $request->file('image')) {
                 $destinationPath = 'public/products/image/'; // upload path
                 $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
                 $files->move($destinationPath, $profileImage);
-                $insert['image'] = "$profileImage";
+                $product->image =$profileImage; 
             }
 
-            $insert['name'] = $request->get('name');
-            $insert['user_id'] = Auth::user()->id;
-            $insert['description'] = $request->get('description');
-            $insert['prix'] = $request->get('prix');
-            $insert['showroom_id'] = $request->get('showroom_id');
-            $insert['category_id'] = $request->get('category_id');
-            Product::insert($insert);
+            if ($files = $request->file('video')) {
+                $destinationPath = 'public/products/video/'; // upload path
+                $profileVideo = date('YmdHis') . "." . $files->getClientOriginalExtension();
+                $files->move($destinationPath, $profileVideo);
+                $product->video = $profileVideo;
+            }
+
+    
+            $product->name  = $request->get('name');
+            $product->user_id =Auth::user()->id;
+            $product->description  = $request->get('description');
+            $product->prix = $request->get('prix');
+            $product->showroom_id = $request->get('showroom_id');
+            $product->category_id = $request->get('category_id');
+            $product->sub_category_id = $request->get('sub_category_id');
+            $product->save();
+  
+       
+                //new catalog
+    
+
+                if ($request->hasfile('files')) {
+                    foreach ($request->file('files') as $file) {
+                        $image = new catalog();
+                        $name = $file->getClientOriginalName();
+                        $file->move('public/products/catalog/', $name);
+                        $image->url = $name;
+                        $image->product_id = $product->id;
+                        $image->save();
+                    }
+                }
+                 
             return Redirect()->route('products.index')
-                ->with('success','Un produit à  créer');
+                ->with('message','Un produit à  créer');
     }
 
     /**
@@ -98,7 +139,8 @@ class ProductController extends Controller
         $showrooms = Showroom::all();
         $categories = Category::all();
         $product = Product::find($id);
-          return view('back_end.products.edit',compact('showrooms','categories','product'));
+        $subcategories = Souscategory::all();
+          return view('back_end.products.edit',compact('showrooms','categories','product','subcategories'));
     }
 
     /**
@@ -114,8 +156,19 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'required',
             'prix' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'showroom_id' => 'required',
             'category_id' => 'required',
+            ],[
+
+                'name.required'    => 'le champ titre est obligatoire!',
+                'image.max'      => 'le taille de image doit étre inférieur à 2048!',
+                'image.mimes'      => 'remplire le champ par un image!',
+                'description.required' => 'le champ description est obligatoire!',
+                'prix.required'      => 'le champ prix est obligatoire!',
+                'showroom_id.required'      => 'Choisie une showroom!',
+                'category_id.required'      => 'choisie une categorie!',
+
             ]);
             $update = ['name' => $request->name, 'description' => $request->description , 'prix'=>$request->prix, 'showroom_id'=>$request->showroom_id, 'category_id'=>$request->category_id];
             if ($files = $request->file('image')) {
@@ -124,6 +177,12 @@ class ProductController extends Controller
                 $files->move($destinationPath, $profileImage);
                 $update['image'] = "$profileImage";
                 }
+                if ($files = $request->file('video')) {
+                    $destinationPath = 'public/products/video/'; // upload path
+                    $profileVideo = date('YmdHis') . "." . $files->getClientOriginalExtension();
+                    $files->move($destinationPath, $profileVideo);
+                    $update['video'] = $profileVideo;
+                }
 
             $update['name'] = $request->get('name');
             $update['user_id'] = Auth::user()->id;
@@ -131,9 +190,26 @@ class ProductController extends Controller
             $update['prix'] = $request->get('prix');
             $update['showroom_id'] = $request->get('showroom_id');
             $update['category_id'] = $request->get('category_id');
+            $update['sub_category_id'] = $request->get('subcategory_id');
             Product::where('id',$id)->update($update);
+
+            $images = $request->file('files');
+                //new catalog
+             
+                if ($request->hasFile('files')) {
+                    
+                    foreach ($images as $item):
+                        $image = new catalog();
+                        $destinationPath = 'public/products/catalog/'; // upload path
+                        $profileImage = date('YmdHis') . "." . $item->getClientOriginalExtension();
+                         $item->move($destinationPath, $profileImage);
+                        $image->url = $profileImage;
+                        $image->product_id = $id;
+                        $image->save();
+                    endforeach;
+                }
             return Redirect()->route('products.index')
-                ->with('success','Un produit à modifier');
+                ->with('message','Un produit à modifier');
     }
 
     /**
@@ -148,6 +224,6 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')
 
-                        ->with('success','un produit à supprimé');
+                        ->with('message','un produit à supprimé');
     }
 }

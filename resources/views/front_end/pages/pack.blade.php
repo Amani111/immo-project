@@ -1,7 +1,19 @@
 @extends('front_end.layouts.app')
 
 @section('title','packs')
+<style>
 
+.button3:hover {
+	border-radius: 30px;
+	 
+}
+.button3{
+	background-color:#10acb2 !important;
+}
+.text-primary{
+	color: #10acb2 !important;
+}
+</style>
 @section('content')
 
     <!--=============================================
@@ -41,39 +53,35 @@
 		<div class="container">
 			
 		<!--=======  single blog post  =======-->
-		@foreach ($data as $key => $pack)
-		<div class="single-blog-post mb-35">
-			<div class="row">
-				<div class="col-md-6">
-					<div class="single-blog-post-media mb-20">
-						<div class="image">
-							<a href="{{route('register')}}"><img width="500" height="317"  src="/public/image/{{$pack->image}}" alt=""></a>
-						</div>
-					</div>
+	
+		<div class="row">
+			@foreach ($data as $key => $pack)
+			<div class="col-md-3 text-center">
+			<div class="card mb-4 box-shadow">
+				<div class="card-header">
+				  <h4 class="my-0 font-weight-normal text-card">{{$pack->title}}</h4>
 				</div>
-				<div class="col-md-6">
-					<div class="single-blog-post-content">
-						<h3 class="post-title"> <a href="#"> {{$pack->title}}</a></h3>
-						<div class="post-meta">
-							<p><span></span> <a href="#"></a> <span><i class="fa fa-calendar"></i> <a href="#"></a>{{$pack->duree}} </span></p>
-						</div>
-						<div class="post-meta">
-							<p><span></span> <a href="#">Prix :</a>  {{$pack->prix}}(DT)</p>
-						</div>
-						<div class="post-meta">
-							<p><span></span> <a href="#">Nombre des produits :</a> <span><a href="#"></a>{{$pack->nb_picture}}</span></p>
-						</div>
-
-
-						<p class="post-excerpt">
-							{{$pack->description}}.
-						</p>
-						<a  class="blog-readmore-btn" href="{{route('register')}}">Inscri vous</a>
-					</div>
+				<div class="card-body">
+				  <h1 class="card-title pricing-card-title">{{$pack->prix}}<small class="text-muted">/ mo</small></h1>
+				  <p class="mb-2">Nombre des images par pack: {{$pack->nb_picture}}</p>
+				  <ul class="list-unstyled mt-3 mb-4">
+					@php
+					$desc = json_decode($pack->description);
+					@endphp
+					@foreach($desc as $key =>$index)
+					<li> <i class="fa fa-check" style="color: green;"></i>{{$index}}</li>
+					@endforeach
+				  </ul>
+		
+				  <a  class="btn btn-primary button3" href="{{route('register',$pack->id)}}">Commander</a>
 				</div>
+			  </div>
 			</div>
+			@endforeach
+	
 		</div>
-		@endforeach
+	
+		  
 		<!--=======  Pagination  =======-->
 		<div class="pagination-area mb-sm-50 mb-md-50">
 		{!! $data->render() !!}

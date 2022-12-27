@@ -10,7 +10,7 @@
 
         <div >
 
-            <h4>Créer une showroom</h4>
+            <h4>Créer un Magasin</h4>
 
         </div>
 
@@ -18,25 +18,17 @@
 
 </div>
 
-
-
-@if (count($errors) > 0)
-
-  <div >
-    <ul>
-       @foreach ($errors->all() as $error)
-
-         <li><span class="alert alert-danger">{{ $error }}</span></li>
-
-       @endforeach
-
-    </ul>
-  </div>
-
+@if(Session::has('errors'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>
+                {{ $error }}  
+            </li>
+            @endforeach
+        </ul>
+    </div>
 @endif
-
-
-
 
 {!! Form::open(array('route' => 'showrooms.store','method'=>'POST','files' => true)) !!}
 
@@ -75,8 +67,27 @@
             {!! Form::tel('telephone', null, array('placeholder' => 'num telephone','class' => 'form-control')) !!}
         </div>
         <div class="col-md-6" >
-            <h5>védio :</h5>
-            {!! Form::file('vedio', array('placeholder' => 'vedio','class' => 'form-control','accept'=>'video/mp4,video/x-m4v,video/*'),) !!}
+            <h5>Video :</h5>
+            {!! Form::file('video', array('placeholder' => 'video','class' => 'form-control','accept'=>'video/mp4,video/x-m4v,video/*'),) !!}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" >
+            <h5>lien facebook:</h5>
+            {!! Form::text('facebook', null, array('placeholder' => 'lien facebook ..','class' => 'form-control')) !!}
+        </div>
+        <div class="col-md-6" >
+
+            <h5>lien instagram:</h5>
+
+            {!! Form::text('instagram', null, array('placeholder' => 'lien instagram ..','class' => 'form-control')) !!}
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Image *:</h5>
+            {!! Form::file('image', array('placeholder' => 'image','class' => 'form-control','accept'=>'image/x-png,image/gif,image/jpeg')) !!}
         </div>
     </div>
     <div class="row">
@@ -88,10 +99,10 @@
 
     <div class=" row mapform" >
             <div class="col-md-12">
-                <h5> choisie votre posistion</h5>
+                <h5> choisie votre emplacement</h5>
                 <input type="text" class="form-control" placeholder="lat" name="lat" id="lat" hidden>
                 <input type="text" class="form-control" placeholder="lng" name="lng" id="lng" hidden>
-                <div id="map" style="height:400px; width: 800px;" class="my-3"></div>
+                <div id="map" style="height:700px; width: 1100px;" class="my-3"></div>
             </div>
         
     </div>
@@ -99,7 +110,7 @@
     <hr>
     <div class="row">
         <div class="col-md-6">
-            <button class="btn btn-primary" type="submit" >Submit</button>
+            <button class="btn btn-primary" type="submit" >Créer</button>
         </div>
     </div>
     

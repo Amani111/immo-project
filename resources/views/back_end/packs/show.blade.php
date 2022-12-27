@@ -33,7 +33,7 @@
         <div >
 
             <h5>image:</h5>
-            <img src="/public/image/{{$pack->image}}" alt="" srcset="" width="700px" height="300px">
+            <img src="{{asset('/public/image/'.$pack->image)}}" alt="" srcset="" width="700px" height="300px">
 
 
         </div>

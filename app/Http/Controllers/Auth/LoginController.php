@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class LoginController extends Controller
 {
@@ -69,8 +70,15 @@ class LoginController extends Controller
         $email = $request->email;
         $pass = $request->password;
     
-        if(Auth::attempt(['email' => $email, 'password' => $pass, 'active' => '1'])){
-            return redirect()->route('dashboard');
+        if($user = Auth::attempt(['email' => $email, 'password' => $pass, 'active' => '1'])){
+            $user = Auth::user();
+           
+            if($user->getRoleNames()[0] == 'admin'){
+                return redirect()->route('dashboardadmin');
+            }else{
+                return redirect()->route('dashboarduser');
+            }
+            
         }else{
             return redirect()->back()->with('error','activer votre compte!');
         }
@@ -97,9 +105,17 @@ class LoginController extends Controller
         return redirect()->route('/');
     }
 ///view register
-    public function create()
+    public function create($id)
     {
-        return view('auth.register');
+        $pack_id = $id;
+        $user = Auth::user();
+        if(isset($user)){
+            Auth::logout();
+            return view('auth.register');
+        }else{
+            return view('auth.register',compact('pack_id'));
+        }
+       
     }
 
     public function store(Request $request)
@@ -115,9 +131,19 @@ class LoginController extends Controller
             'name' => $request['name'],
             'phone' => $request['phone'],
             'email' => $request['email'],
+            'Adresse' => $request['Adresse'],
+            'facebook' => $request['facebook'],
+            'siteweb' => $request['siteweb'],
             'password' => Hash::make($request['password']),
             'active' =>'0',
         ]);
+
+        $role = Role::where('name', 'user')->first();
+		if ($role) {
+			$user->assignRole([$role->id]); 
+        }
+
+        
         
         return redirect()->back()->with('success','vérifier votre courrier  et contactez nous pour activé votre compte !');;
     }

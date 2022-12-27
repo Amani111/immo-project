@@ -5,38 +5,27 @@
 @section('content')
 
 <div >
-
     <div >
-
         <div >
-
             <h2>Créer une pack</h2>
 
         </div>
-
-       
-
     </div>
-
 </div>
 
-
-
-@if (count($errors) > 0)
-
-  <div >
+@if(Session::has('errors'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
     <ul>
-       @foreach ($errors->all() as $error)
-
-         <li><span class="alert alert-danger">{{ $error }}</span></li>
-
-       @endforeach
-
+        @foreach ($errors->all() as $error)
+        <li>
+            {{ $error }}  
+        </li>
+        @endforeach
     </ul>
-  </div>
+   
 
+</div>
 @endif
-
 
 <form action="{{route('packs.store')}}" class="form-horizontal" method="POST" role="form" enctype="multipart/form-data">
 
@@ -44,18 +33,14 @@
 <div class="container">
 
     <div class="row">
-
-        <div class="col-md-6" >
+        <div class="col-md-12" >
             <strong>titre *:</strong>
             {!! Form::text('title', null, array('placeholder' => 'Titre','class' => 'form-control')) !!}
         </div>
-        <div class="col-md-6">
-
+        {{-- <div class="col-md-6">
             <strong>Image *:</strong>
-
             {!! Form::file('image', array('placeholder' => 'image','class' => 'form-control')) !!}
-
-        </div>
+        </div> --}}
     </div>
     <div class="row">
         <div class="col-md-6" >
@@ -70,21 +55,20 @@
     <div class="row">
         <div class="col-md-6" >
             <strong>description *:</strong>
-            {!! Form::textarea('description', null, array('placeholder' => 'description','class' => 'form-control')) !!}
+            <input type="text" class="form-control" name='description[]'>
+             <button type="button" class="addService btn btn-primary">Add More</button>
         </div>
         <div class="col-md-6">
             <strong>dureé par jour*:</strong>
             {!! Form::text('duree',null, array('placeholder' => 'dureé par jour','class' => 'form-control')) !!}
         </div>
-
-
     </div>
 
     <hr>
     <div class="row">
 
         <div class="col-md-6">
-            <button class="btn btn-primary" type="submit" >Submit</button>
+            <button class="btn btn-primary" type="submit" >Créer</button>
         </div>
     </div>
     
@@ -92,8 +76,13 @@
 
 </form>
 
-
-
-
-
 @endsection
+
+@push('after-scripts')
+<script type="text/javascript">
+   $(document).on('click', '.addService', function(){
+    var html = '<div><input class="form-control" type="text" name="description[]"></div>';
+        $(this).parent().append(html);
+        });
+    </script>
+ @endpush

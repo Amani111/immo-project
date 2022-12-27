@@ -26,7 +26,7 @@
     {{-- <link rel="stylesheet" type="text/css" href="{{asset('front-end/css/register.css')}}"> --}}
 
 </head>
-<body style="background-image: url({{('front-end/images/backgrounds/bg1.webp')}})">
+<body style="background-image: url({{('front-end/images/backgrounds/bb3.jpg')}});  background-size: cover;background-repeat: no-repeat;">
         <!--=============================================
     =            Login Register page content         =
     =============================================-->
@@ -55,7 +55,7 @@
                                  @enderror
                             </div>
                             <div class="col-12 mb-20">
-                                <label>Password * </label>
+                                <label>Mot de pass * </label>
                                 <input class="mb-0 @error('password') is-invalid @enderror" type="password" placeholder="Password" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">

@@ -33,11 +33,11 @@
 
 <body class="g-sidenav-show  bg-gray-100">
     @include('back_end.includes.asidebar')
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <main class="main-content  ">
         <!-- Navbar -->
       @include('back_end.includes.header')
         <!-- End Navbar -->
-        <div class="container-fluid py-4 px-5">
+        <div class="container">
          
           @yield('content')
           @include('back_end.includes.footer')

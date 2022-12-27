@@ -17,7 +17,7 @@
         <div class="col-md-3">
 
             <a class="btn btn-success"  href="{{ route('products.create') }}"> <i class="fa-solid fa-plus"></i> Créer</a>
-
+            
         </div>
 
     </div>
@@ -52,14 +52,11 @@
    
        <td>{{ ++$i }}</td>
        <td>{{ $product->name }}</td>
-       <td><img src="/public/products/image/{{$product->image}}" alt="" srcset="" width="100px" height="100px"></td>
+       <td><img src="{{asset('/public/products/image/'.$product->image)}}" alt="" srcset="" width="100px" height="100px"></td>
        <td>{{ $product->prix }} DT</td>
       
       <td>{{ $product->category->name}}</td>
        <td>
-   
-          {{-- <a class="btn btn-sm btn-info" href="{{ route('showrooms.show',$showroom->id) }}" ><i class="fa-regular fa-eye"></i></a> --}}
-   
           <a class="btn btn-sm btn-warning"  href="{{ route('products.edit',$product->id) }}"><i class="fa-regular fa-pen-to-square"></i></a>
    
            {!! Form::open(['method' => 'DELETE','route' => ['products.destroy', $product->id],'style'=>'display:inline']) !!}

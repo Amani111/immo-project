@@ -53,7 +53,7 @@
 
   <tr>
 
-    <td>{{ ++$i }}</td>
+    <td>{{++$i}}</td>
     <td>{{ $pack->name }}</td>
     <td>{{$pack->slug}}</td>
   

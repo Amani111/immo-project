@@ -20,18 +20,18 @@
 
 
 
-@if (count($errors) > 0)
-
-  <div class="row">
+@if(Session::has('errors'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
     <ul>
-       @foreach ($errors->all() as $error)
-
-         <li><span class="alert alert-danger">{{ $error }}</span></li>
-
-       @endforeach
+        @foreach ($errors->all() as $error)
+        <li>
+            {{ $error }}  
+        </li>
+        @endforeach
     </ul>
-  </div>
+   
 
+</div>
 @endif
 
 
@@ -59,7 +59,7 @@
 
             <h5>Image:</h5>
 
-            <img src="/public/image/{{$pack->image}}" alt="" srcset="" width="700px" height="300px">
+            <img src="{{asset('/public/image/'.$pack->image)}}" alt="" srcset="" width="700px" height="300px">
 
         </div>
     </div>
@@ -101,7 +101,7 @@
 
     <div class="row" >
         <div class="col-md-6">
-            <button class="btn btn-primary" type="submit" >Submit</button>
+            <button class="btn btn-primary" type="submit" >Modifier</button>
         </div>
     </div>
 

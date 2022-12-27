@@ -2,7 +2,7 @@
 	=            hero slider         =
 	=============================================-->
 
-	<div class="hero-area mb-30">
+	<div class="hero-area mb-30" style="margin-top: 5px !important;">
 		<!--=======  slider container  =======-->
 
 		<div class="slider-container">
@@ -21,10 +21,10 @@
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="slider-content">
-										<p>Exclusive Offer -60% Off This Week </p>
-										<h1>Carronade <span>Pendant Lamp-Black </span></h1>
-										<p class="slider-price">starting at <span>$260.99</span></p>
-										<a href="shop-left-sidebar.html" class="slider-btn">SHOP NOW</a>
+										<p> </p>
+										<h1>La plateforme mobilyacom</h1>
+										<p class="slider-price"> est une foire de meuble en ligne</span></p>
+										<a href="{{route('contact')}}" class="slider-btn">Contactez nous</a>
 									</div>
 								</div>
 							</div>
@@ -46,10 +46,10 @@
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="slider-content">
-										<p>Exclusive Offer -20% Off This Week </p>
-										<h1>Conbox Fan <span>Collection 2018</span></h1>
-										<p class="slider-price">starting at <span>$260.99</span></p>
-										<a href="shop-left-sidebar.html" class="slider-btn">SHOP NOW</a>
+										<p> </p>
+										<h1>mobilyacom</h1>
+										<p class="slider-price">est un nouveau site dédié au monde du mobilier</p>
+										<a href="{{route('contact')}}" class="slider-btn">Contactez nous</a>
 									</div>
 								</div>
 							</div>
@@ -71,10 +71,11 @@
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="slider-content">
-										<p>Exclusive Offer -30% Off This Week </p>
-										<h1>Decorative <span>Outdoor Chair 2018 </span></h1>
-										<p class="slider-price">starting at <span>$260.99</span></p>
-										<a href="shop-left-sidebar.html" class="slider-btn">SHOP NOW</a>
+										<p></p>
+										<h1>La possibilité de suivre toutes les nouveautése</h1>
+										<p class="slider-price">toutes les promotions ainsi que les ventes flashs des
+											créateurs et fabricants des meubles en Tunisie</p>
+											<a href="{{route('contact')}}" class="slider-btn">Contactez nous</a>
 									</div>
 								</div>
 							</div>

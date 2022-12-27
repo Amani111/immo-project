@@ -14,10 +14,10 @@ class CreateSouscategoriesTable extends Migration
     public function up()
     {
         Schema::create('souscategories', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('name');
             $table->string('slug');
-            $table->unsignedBigInteger('category_id')->unsigned();
+            $table->integer('category_id')->unsigned();
             $table->timestamps();
         });
         Schema::table('souscategories', function($table) {

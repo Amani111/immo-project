@@ -10,7 +10,7 @@
 
         <div>
 
-            <h2>Editer showroom</h2>
+            <h2>Editer Magasin</h2>
 
         </div>
 
@@ -20,23 +20,21 @@
 
 
 
-@if (count($errors) > 0)
-
-  <div >
+@if(Session::has('errors'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
     <ul>
-       @foreach ($errors->all() as $error)
-
-         <li><span class="alert alert-danger">{{ $error }}</span></li>
-
-       @endforeach
+        @foreach ($errors->all() as $error)
+        <li>
+            {{ $error }}  
+        </li>
+        @endforeach
     </ul>
-  </div>
-
+</div>
 @endif
 
 
 
-{!! Form::model($showroom, ['method' => 'PATCH','route' => ['showrooms.update', $showroom->id]]) !!}
+{!! Form::model($showroom, ['method' => 'PATCH','route' => ['showrooms.update', $showroom->id],'files' => true]) !!}
 
 <div class="container" >
 
@@ -59,12 +57,15 @@
         <div class="col-md-6">
             <h5>Ville * :</h5>
             <select name="govliste_id" id="govliste_id" class="form-control">
-                <option value="0" disabled selected>--choisie ville--</option>
+               
                 @foreach($city as $array)
-                
+                    @if($array->id == $showroom->govliste_id)
+                        <option value="{{$array->id}}" selected>{{$array->name}}</option>
+                    @endif
                     <option value="{{$array->id}}">{{$array->name}}</option>
                 @endforeach
             </select>
+            
         </div>
     </div>
     <div class="row">
@@ -73,8 +74,27 @@
             {!! Form::tel('telephone', null, array('placeholder' => 'num telephone','class' => 'form-control')) !!}
         </div>
         <div class="col-md-6" >
-            <h5>védio :</h5>
-            {!! Form::file('vedio', array('placeholder' => 'vedio','class' => 'form-control','accept'=>'video/mp4,video/x-m4v,video/*'),) !!}
+            <h5>Video :</h5>
+            {!! Form::file('video', array('placeholder' => 'video','class' => 'form-control','accept'=>'video/mp4,video/x-m4v,video/*'),) !!}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" >
+            <h5>lien facebook:</h5>
+            {!! Form::text('facebook', null, array('placeholder' => 'lien facebook ..','class' => 'form-control')) !!}
+        </div>
+        <div class="col-md-6" >
+
+            <h5>lien instagram:</h5>
+
+            {!! Form::text('instagram', null, array('placeholder' => 'lien instagram ..','class' => 'form-control')) !!}
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Image *:</h5>
+            {!! Form::file('image', array('placeholder' => 'image','class' => 'form-control')) !!}
         </div>
     </div>
     <div class="row">
@@ -86,10 +106,10 @@
 
     <div class=" row mapform" >
             <div class="col-md-12">
-                <h5> choisie votre posistion</h5>
+                <h5> choisie votre emplacement</h5>
                 <input type="text" class="form-control" placeholder="lat" name="lat" id="lat" hidden>
                 <input type="text" class="form-control" placeholder="lng" name="lng" id="lng" hidden>
-                <div id="map" style="height:400px; width: 800px;" class="my-3"></div>
+                <div id="map" style="height:600px; width: 1200px;" class="my-3"></div>
             </div>
         
     </div>
@@ -97,7 +117,7 @@
     <hr>
     <div class="row">
         <div class="col-md-6">
-            <button class="btn btn-primary" type="submit" >Submit</button>
+            <button class="btn btn-primary" type="submit" >Modifier</button>
         </div>
     </div>
     

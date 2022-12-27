@@ -17,11 +17,11 @@ class PackController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Pack::orderBy('id','DESC')->paginate(7);
+        $data = Pack::orderBy('id','DESC')->paginate(9);
 
         return view('back_end.packs.index',compact('data'))
 
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * 9);
     }
 
     /**
@@ -42,30 +42,31 @@ class PackController extends Controller
      */
     public function store(Request $request)
     {
+       
         $request->validate([
             'title' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'description' => 'required',
             'nb_picture' => 'required',
             'duree' => 'required',
             'prix' => 'required',
+            ]
+            ,
+            [   
+                'title.required'    => 'le champ titre est obligatoire!',
+                'nb_picture.required'      => 'Saisie le nombre des images par pack',
+                'duree.required'      => 'le champ duree est obligatoire',
+                'prix.required'      => 'le champ prix est obligatoire',
             ]);
-            if ($files = $request->file('image')) {
-                $destinationPath = 'public/image/'; // upload path
-                $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-                $files->move($destinationPath, $profileImage);
-                $insert['image'] = "$profileImage";
-            }
-
+            //dd($request->description);
+            $description = json_encode($request->description);
             $insert['title'] = $request->get('title');
             $insert['user_id'] = Auth::user()->id;
-            $insert['description'] = $request->get('description');
+            $insert['description'] = $description;
             $insert['nb_picture'] = $request->get('nb_picture');
             $insert['duree'] = $request->get('duree');
             $insert['prix'] = $request->get('prix');
             Pack::insert($insert);
             return Redirect()->route('packs.index')
-                ->with('success','Une pack est créer');
+                ->with('message','Une pack  créer');
     }
 
     /**
@@ -105,10 +106,16 @@ class PackController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'description' => 'required',
             'nb_picture' => 'required',
             'duree' => 'required',
             'prix' => 'required',
+            ],
+            [   
+                'title.required'    => 'le champ titre est obligatoire!',
+                'description.required' => 'le champ description est obligatoire',
+                'nb_picture.required'      => 'Saisie le nombre des images par pack',
+                'duree.required'      => 'le champ duree est obligatoire',
+                'prix.required'      => 'le champ prix est obligatoire',
             ]);
             $update = ['title' => $request->title, 'description' => $request->description];
             if ($files = $request->file('image')) {
@@ -125,7 +132,7 @@ class PackController extends Controller
         
             Pack::where('id',$id)->update($update);
             return Redirect()->route('packs.index')
-            ->with('success','Pack a eté modifié');
+            ->with('message','une pack modifier');
     }
 
     /**
@@ -140,6 +147,6 @@ class PackController extends Controller
 
         return redirect()->route('packs.index')
 
-                        ->with('success','une pack est supprimé');
+                        ->with('message','une pack  supprimée');
     }
 }

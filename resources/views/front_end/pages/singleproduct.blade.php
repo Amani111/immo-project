@@ -1,6 +1,6 @@
 @extends('front_end.layouts.app')
 
-@section('title','tuni-meuble')
+@section('title','single-meuble')
 
 @section('content')
  <!--=============================================
@@ -42,74 +42,27 @@
 								aria-labelledby="single-slide-tab-1">
 								<!--Single Product Image Start-->
 								<div class="single-product-img img-full">
-									<img width="600" height="600"  src="/public/products/image/{{$data->image}}" class="img-fluid" alt="">
-									<a class="big-image-popup"><i
+									<img width="600" height="600"  src="{{asset('/public/products/image/'.$data->image)}}" class="img-fluid" alt="">
+									<a href="{{asset('/public/products/image/'.$data->image)}}" class="big-image-popup"><i
 											class="fa fa-search-plus"></i></a>
 								</div>
 								<!--Single Product Image End-->
 							</div>
-							<div class="tab-pane fade" id="single-slide-2" role="tabpanel" aria-labelledby="single-slide-tab-2">
-								<!--Single Product Image Start-->
-								<div class="single-product-img img-full">
-									<img width="600" height="600"  src="/public/products/image/{{$data->image}}" class="img-fluid" alt="">
-									<a href="#" class="big-image-popup"><i
-											class="fa fa-search-plus"></i></a>
-								</div>
-								<!--Single Product Image End-->
-							</div>
-							<div class="tab-pane fade" id="single-slide-3" role="tabpanel" aria-labelledby="single-slide-tab-3">
-								<!--Single Product Image Start-->
-								<div class="single-product-img img-full">
-									<img width="600" height="600"  src="/public/products/image/{{$data->image}}" class="img-fluid" alt="">
-									<a href="#" class="big-image-popup"><i
-											class="fa fa-search-plus"></i></a>
-								</div>
-								<!--Single Product Image End-->
-							</div>
-							<div class="tab-pane fade" id="single-slide-4" role="tabpanel" aria-labelledby="single-slide-tab-4">
-								<!--Single Product Image Start-->
-								<div class="single-product-img img-full">
-									<img width="600" height="600"  src="/public/products/image/{{$data->image}}" class="img-fluid" alt="">
-									<a href="#" class="big-image-popup"><i
-											class="fa fa-search-plus"></i></a>
-								</div>
-								<!--Single Product Image End-->
-							</div>
-							<div class="tab-pane fade" id="single-slide-5" role="tabpanel" aria-labelledby="single-slide-tab-5">
-								<!--Single Product Image Start-->
-								<div class="single-product-img img-full">
-									<img width="600" height="600"  src="/public/products/image/{{$data->image}}" class="img-fluid" alt="">
-									<a href="#" class="big-image-popup"><i
-											class="fa fa-search-plus"></i></a>
-								</div>
-								<!--Single Product Image End-->
-							</div>
+					
+						
+						
 						</div>
 						<!--product large image End-->
 
 						<!--product small image slider Start-->
 						<div class="product-small-image-list fl-product-small-image-list fl3-product-small-image-list">
 							<div class="nav small-image-slider fl3-small-image-slider" role="tablist">
+								@foreach($catalogs as $catalog)
 								<div class="single-small-image img-full">
 									<a data-bs-toggle="tab" id="single-slide-tab-1" href="#single-slide-1"><img
-											width="600" height="600"  src="/public/products/image/{{$data->image}}" class="img-fluid" alt=""></a>
+											width="600" height="100"  src="{{asset('/public/products/catalog/'.$catalog->url)}}"  alt=""></a>
 								</div>
-								<div class="single-small-image img-full">
-									<a data-bs-toggle="tab" id="single-slide-tab-2" href="#single-slide-2"><img
-											width="600" height="600"  src="/public/products/image/{{$data->image}}" class="img-fluid" alt=""></a>
-								</div>
-								<div class="single-small-image img-full">
-									<a data-bs-toggle="tab" id="single-slide-tab-3" href="#single-slide-3"><img
-											width="600" height="600"  src="/public/products/image/{{$data->image}}" class="img-fluid" alt=""></a>
-								</div>
-								<div class="single-small-image img-full">
-									<a data-bs-toggle="tab" id="single-slide-tab-4" href="#single-slide-4"><img
-											width="600" height="600"  src="/public/products/image/{{$data->image}}" class="img-fluid" alt=""></a>
-								</div>
-								<div class="single-small-image img-full">
-									<a data-bs-toggle="tab" id="single-slide-tab-5" href="#single-slide-5"><img
-											width="600" height="600"  src="/public/products/image/{{$data->image}}" class="img-fluid" alt=""></a>
-								</div>
+								@endforeach
 							</div>
 						</div>
 						<!--product small image slider End-->
@@ -129,11 +82,11 @@
 							<i class="fa fa-star"></i>
 						</div>
 
-						<p class="d-inline-block ml-10 review-link"><a href="#">(1 customer review)</a></p>
+						<p class="d-inline-block ml-10 review-link"><a href="#"></a></p>
 
 						<h2 class="product-price mb-0">
 							
-							<span class="discounted-price"> {{$data->prix}} (DT)</span>
+							<span class="discounted-price">{{ isset($data) ? $data->prix : 'null' }}{{ isset($data->prix) ? 'DT' : '' }}</span>
 						</h2>
 
 						<p class="product-description mb-20">{{$data->description}}</p>
@@ -142,19 +95,25 @@
 					
 
 						<div class="category-list-container mb-20">
-							<span>Categories: </span>
+							<span>Categorie: </span>
 							<ul>
-								<li><a href="shop-left-sidebar.html">{{$data->category->name}}</a></li>
+								<li><a href="{{route('productwithcategory',$data->category_id)}}">{{$data->category->name}}</a></li>
+							</ul>
+						</div>
+						<div class="category-list-container mb-20">
+						
+							<span>Showroom: </span>
+							<ul>
+								<li><a href="{{route('singleshowroomstuni',$data->showroom_id)}}">{{$data->showrooms->name}}</a></li>
 							
 							</ul>
 						</div>
 
 						<div class="social-share-buttons">
-							<h3>Share </h3>
+							<h3>Suivez-nous</h3>
 							<ul>
-								<li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a class="pinterest" href="#"><i class="fa fa-pinterest"></i></a></li>
+								<li><a class="facebook" href="{{$data->facebook}}"><i class="fa fa-facebook"></i></a></li>
+								<li><a class="google-plus" href="{{$data->instagram	}}"><i class="fa fa-instagram"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -166,7 +125,32 @@
 
 	<!--=====  End of single product content  ======-->
     <!--=======  End of product description review   =======-->
+	@if($data->video != null)
+	<div class="related-product-slider-area mb-50">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<!--=======  section title  =======-->
 
+					<div class="section-title">
+						<h2>Video</h2>
+					</div>
+
+					<!--=======  End of section title  =======-->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<!--=======  tab product slider  =======-->
+						<div class="post-audio mb-20">
+							<iframe width="900" height="300" allow="autoplay" src="{{asset('/public/products/video/'.$data->video)}}"></iframe>
+						</div>
+					<!--=======  End of tab product slider  =======-->
+				</div>
+			</div>
+		</div>
+	</div>
+	@endif
 	<!--=============================================
     =            related product slider         =
     =============================================-->
@@ -178,7 +162,7 @@
 					<!--=======  section title  =======-->
 
 					<div class="section-title">
-						<h2>RELATED PRODUCTS</h2>
+						<h2>PRODUITS SIMILAIRES</h2>
 					</div>
 
 					<!--=======  End of section title  =======-->
@@ -194,8 +178,8 @@
 						<div class="fl-product">
 							<div class="image">
 								<a href="{{route('singleproduct',$item->id)}}">
-									<img width="300" height="300"  src="/public/products/image/{{$item->image}}" class="img-fluid" alt="">
-									<img width="300" height="300"  src="/public/products/image/{{$item->image}}" class="img-fluid" alt="">
+									<img width="300" height="200"  src="{{asset('/public/products/image/'.$item->image)}}"  alt="">
+									<img width="300" height="200"  src="{{asset('/public/products/image/'.$item->image)}}"  alt="">
 								</a>
 								<!-- wishlist icon -->
 								<span class="wishlist-icon">

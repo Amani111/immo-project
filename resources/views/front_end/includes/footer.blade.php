@@ -7,13 +7,13 @@
     <div class="footer-navigation pt-40 pb-20 pb-lg-40 pt-sm-30 pb-sm-10">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-5 col-md-6">
                     <!--=======  address block  =======-->
 
                     <div class="address-block">
                         <div class="image">
-                            <a href="index.html">
-                                <img width="186" height="53"  src="{{('front-end/images/logo.webp')}}" class="img-fluid" alt="">
+                            <a href="{{route('/')}}">
+                                <img width="186" height="53"  src="{{asset('front-end/images/LOgo1-removebg-preview.png')}}" class="img-fluid" alt="">
                             </a>
                         </div>
 
@@ -22,17 +22,15 @@
                                 <li>Address: IMM, cercle des bureaux centre urbain nord tunis 1082 </li>
                                 <li>téléphone: (216) 71 822 371</li>
                                 <li>Fax: (216)  71 822 371</li>
-                                <li>Email: contact@i-d-com.com</li>
+                                <li>Email: contact@mobilyacom.com.tn</li>
                             </ul>
                         </div>
 
                         <div class="social-links">
                             <ul>
-                                <li><a href="http://www.twitter.com/" class="twitter" data-tooltip="Twitter"><i
-                                            class="fa fa-twitter"></i></a></li>
-                                <li><a href="http://www.facebook.com/" class="facebook" data-tooltip="Facebook"><i
+                                <li><a href="https://www.facebook.com/profile.php?id=100088165866244" class="facebook" data-tooltip="Facebook"><i
                                             class="fa fa-facebook"></i></a></li>
-                                <li><a href="https://www.instagram.com/" class="facebook" data-tooltip="instragram"><i
+                                <li><a href="https://www.instagram.com/mobilyacom_tunis/" class="facebook" data-tooltip="instragram"><i
                                     class="fa fa-instagram"></i></a></li>
                                 <li><a href="http://www.youtube.com/" class="facebook" data-tooltip="YouTube"><i
                                             class="fa fa-youtube"></i></a></li>
@@ -49,10 +47,12 @@
                     <div class="widget-block">
                         <h4 class="footer-widget-title mb-sm-10">A PROPOS</h4>
                         <ul>
-                            <li><a href="about.html">Qui somme nous ?</a></li>
-                            <li><a href="#">Tunimeuble Services</a></li>
-                            <li><a href="contact.html">Vendez sur tunimeuble</a></li>
-                            <li><a href="blog-left-sidebar.html">Devenez un partenaire de tunimeuble</a></li>
+                            <li><a href="{{route('apropos')}}">Apropos</a></li>
+                            <li><a href="{{route('Comment')}}">comment ça marche ?</a></li>
+                            <li><a href="{{route('fqa')}}"> FAQ</a></li>    
+                            {{-- <li><a href="#">Tunimeuble Services</a></li> --}}
+                            <li><a href="{{route('contact')}}"> Nous Contacter</a></li>                  
+                            <li><a href="{{route('pack')}}">Devenez un partenaire de mobilyacom</a></li>
 
                         </ul>
                     </div>
@@ -60,19 +60,20 @@
                     <!--=======  End of widget block  =======-->
                 </div>
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <!--=======  widget block  =======-->
 
                     <div class="widget-block">
                         <h4 class="footer-widget-title mt-sm-20 mb-sm-10"></h4>
                         <ul>
-                            <li><a href="about.html">Accueil</a></li>
-                            <li><a href="#">ste</a></li>
-                            <li><a href="contact.html">packs</a></li>
-                            <li><a href="contact.html">evenements</a></li>
-                            <li>   <div class="newsletter-form mb-20">
-                                <button type="submit" value="submit">Contactez nous</button>
-                        </div></li>
+                            <li class="{{request()->is('/') ? 'active' : '' }}"><a href="{{route('/')}}">Accueil</a></li>
+                            <li class="{{ request()->is('actualite*') ? 'active' : '' }}"><a href="{{route('actualite')}}">Actualité</a></li>
+                            <li class="{{ request()->is('pack*') ? 'active' : '' }}"><a href="{{route('pack')}}">Pack</a></li>
+                            <li class="{{ request()->is('showroomstuni*') ? 'active' : '' }}"><a href="{{route('showroomstuni')}}">Showroom</a></li>
+                            <li class="{{ request()->is('showroomstuni*') ? 'active' : '' }}"><a href="{{route('showroomstuni')}}">Promotion</a></li>
+                            <li>
+                                <a href="{{route('contact')}}" class="parteunaire-btn">Contactez nous</a>
+                        </li>
                         </ul>
 
                         <!--=======  newsletter formq  =======-->
