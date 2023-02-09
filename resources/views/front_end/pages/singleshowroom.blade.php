@@ -68,17 +68,25 @@
 			@foreach ($catalogues as $item)
 			<div class="col-md-4">
 				@php
-				$images = json_decode($item->url);
+				if($item->url != 'Null'){
+					$images = json_decode($item->url);
+				}
+				
 				@endphp
+				@if(!is_null($item->url))
 				@foreach ($images as $key)
 				
 				<div class="card">
-					<a href="{{route('single.catalogue',$item->id)}}" target="_blank"><img class="card-img-top" style="object-fit: cover; with:300px;height: 270px;" src="{{asset('/public/newcatalog/'.$key)}}" alt="Card image"></a>
 					<div class="card-body">
+						<a href="{{route('single.catalogue',$item->id)}}" target="_blank"><img class="card-img-top" style="object-fit: fill; with:300px;height: 270px;" src="{{asset('/public/newcatalog/'.$key)}}" alt="Card image"></a>
 					</div>
 				</div>
 				@break;
 				@endforeach
+				@else
+				<a href="{{route('single.cataloguepdf',$item->id)}}" target="_blank"><img class="card-img-top" style="object-fit: fill; with:300px;height: 270px;" src="{{asset('front-end/images/pdf.png')}}" alt="Card image"></a>
+				@endif
+
 			</div>
 			@endforeach
 		</div>

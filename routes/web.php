@@ -35,6 +35,8 @@ Route::get('{id}/actualite', 'HomeController@singleactualite')->name('singleactu
 Route::get('promotion-tunimeuble', 'HomeController@promotions')->name('promotionstunimeuble');
 Route::get('{id}/download', 'HomeController@download')->name('download');
 Route::get('{id}/single/catalogue', 'HomeController@singlecatalogue')->name('single.catalogue');
+Route::get('{id}/single/catalogue/pdf', 'HomeController@singlecataloguepdf')->name('single.cataloguepdf');
+Route::get('{id}/meuble/promition', 'HomeController@productPromitionwithcategory')->name('productPromitionwithcategory');
 
 //register
 Route::get('/register/{id}', 'Auth\LoginController@create')->name('register');
@@ -84,10 +86,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {
   Route::resource('pub', 'backend\PubController');
   //bar
   Route::resource('bar', 'backend\BarController');
-
+  //inscription
+  Route::resource('inscriptions', 'backend\InscriptionController');
+  Route::get('inscription/change/{id}','backend\InscriptionController@change')->name('inscription.change');
   
 });
-
 
 //*** for user auth */
 Route::group(['prefix' => 'admin', 'middleware' => ['role:user']], function() {
@@ -97,4 +100,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:user']], function() {
   Route::resource('promotions', 'backend\PromotionController');
   Route::resource('catelog', 'backend\CatelogController');
   Route::resource('catelogues', 'backend\CataloguesController');
+  Route::resource('userinscri', 'backend\UserInscriController');
+
+  Route::get('userinscri/packs', 'backend\UserInscriController@demandepack')->name('userinscri.packs');
+  Route::get('userinscri/packs/demande/{id}', 'backend\UserInscriController@userdemande')->name('userinscri.userdemande');
+
 });

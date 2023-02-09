@@ -29,11 +29,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-
-
                     <!--=======  Shop header  =======-->
-
-          
             @if(count($data) > 0)
                   <!--=======  shop product display area  =======-->
                   <div class="shop-product-wrap grid row mb-30 no-gutters">
@@ -57,13 +53,6 @@
                             <div class="content">
                                 <h2 class="product-title"> <a href="{{route('singleproduct',$item->id)}}">{{$item->name}}</a></h2>
                                 <h2 class="product-title"> <a href="{{route('singleshowroomstuni',$item->showrooms->id)}}">{{$item->showrooms->name}}</a></h2>
-                                <div class="rating">
-                                    <i class="fa fa-star active"></i>
-                                    <i class="fa fa-star active"></i>
-                                    <i class="fa fa-star active"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
                                 <p class="product-price">
                                     
                                     <span class="discounted-price">{{$item->prix}}(DT)</span>
@@ -94,13 +83,6 @@
                             <div class="content">
                                 <h2 class="product-title"> <a href="{{route('singleproduct',$item->id)}}">{{$item->name}}</a></h2>
                                 <h2 class="product-title"> <a href="{{route('singleshowroomstuni',$item->showrooms->id)}}">{{$item->showrooms->name}}</a></h2>
-                                <div class="rating">
-                                    <i class="fa fa-star active"></i>
-                                    <i class="fa fa-star active"></i>
-                                    <i class="fa fa-star active"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
                                 <p class="product-price">
                               
                                     <span class="discounted-price">{{$item->prix}}(DT)</span>

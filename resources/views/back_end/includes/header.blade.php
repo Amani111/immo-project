@@ -40,20 +40,18 @@
                
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="text-sm font-weight-normal mb-1">
-                       <a href="{{route('logout')}}">logout</a>
+                       <a href="{{route('logout')}}">Déconnecter</a>
                       </h6>
                     
                     </div>
                   </div>
                 </a>
-              </li>
-            
-           
+              </li>           
             </ul>
           </li>
           <li class="nav-item ps-2 d-flex align-items-center">
             <a href="javascript:;" class="nav-link text-body p-0">
-              <img src="" class="avatar avatar-sm" alt="avatar" />
+              <img src="{{asset('backend/assets/img/icon.png')}}" class="avatar avatar-sm" alt="avatar" />
             </a>
           </li>
         </ul>

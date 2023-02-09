@@ -20,6 +20,8 @@ use App\Promotion;
 use App\Pub;
 use Illuminate\Support\Facades\Mail;
 use ZipArchive;
+use DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class HomeController extends Controller
 {
@@ -67,7 +69,6 @@ class HomeController extends Controller
     public function productwithsubcategory($id)
     {
         $category = Category::all();
-        
         $data = Product::where('sub_category_id',$id)->paginate(10);
         return view('front_end.pages.productwithcategory',compact('data','category'));
     }
@@ -207,7 +208,13 @@ class HomeController extends Controller
         return response()->download('./catalogues/'.$catalogue->url); 
     }
 
-
+    
+    /**
+     * singlecatalogue
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function singlecatalogue($id){
 
         $category = Category::all();
@@ -215,6 +222,37 @@ class HomeController extends Controller
         $images = json_decode($image->url);
         return view('front_end.pages.singlecatalogue',compact('category','images'));
     }
+
+
+   public function  singlecataloguepdf($id){
+    
+    $category = Category::all();
+    $image = Catalogue::find($id);
+    $images = $image->pdf;
+    return view('front_end.pages.singlecataloguepdf',compact('category','images'));
+   }
+    //get product in promotion with id category
+   
+   /**
+    * productPromitionwithcategory
+    *
+    * @param  mixed $id
+    * @return void
+    */
+   public function productPromitionwithcategory($id)
+   {
+        $category = Category::all();
+
+        $data =  FacadesDB::table('products')
+                            ->join('promotions', 'promotions.product_id', '=', 'products.id')
+                            ->where('products.category_id', $id)
+                            ->select('promotions.*','products.image','products.prix','products.name','products.description')
+                            ->paginate(12);
+        //$data = Product::with('promotions')->select('promotions.*')->get();
+
+        return view('front_end.pages.productpromotions',compact('data','category'));
+    
+   }
 
 
 }

@@ -2,7 +2,7 @@
 	=            hero slider         =
 	=============================================-->
 
-	<div class="hero-area mb-30" style="margin-top: 5px !important;">
+	<div class="hero-area mb-30" style="margin-top: -23px !important;">
 		<!--=======  slider container  =======-->
 
 		<div class="slider-container">
@@ -72,7 +72,7 @@
 								<div class="col-lg-12">
 									<div class="slider-content">
 										<p></p>
-										<h1>La possibilité de suivre toutes les nouveautése</h1>
+										<h1>La possibilité de suivre toutes les nouveauté</h1>
 										<p class="slider-price">toutes les promotions ainsi que les ventes flashs des
 											créateurs et fabricants des meubles en Tunisie</p>
 											<a href="{{route('contact')}}" class="slider-btn">Contactez nous</a>

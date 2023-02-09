@@ -45,7 +45,7 @@ class ShowroomController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'video' => 'mimes:mp4,mov,ogg | max:90000',
+            'video' => 'mimes:mp4,mov,ogg|max:5128',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'telephone' => 'required',
@@ -139,6 +139,7 @@ class ShowroomController extends Controller
             'govliste_id' => 'required',
             'code_postal' => 'required',
             'description' => 'required',
+            'video' => 'mimes:mp4,mov,ogg|max:5128',
             ],[
 
                 'name.required'    => 'le champ nom est obligatoire!',
@@ -146,6 +147,7 @@ class ShowroomController extends Controller
                 'telephone.required'      => 'Saisie votre numero de télephone!',
                 'govliste_id.required'      => 'Choisie une ville!',
                 'code_postal.required'      => 'le champ code postal est obligatoire!',
+                'video.max'      => 'video de taille inférieur svp!',
 
             ]);
            

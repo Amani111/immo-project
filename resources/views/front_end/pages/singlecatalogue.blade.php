@@ -2,37 +2,8 @@
 
 @section('title','single showroom')
 @push('before-styles')
-<style>
-    .pageFoldRight {
-	position: absolute;
-	width: 0px;
-	height: 0px;
-	top: 0;
-	right: 0;
-	border-left-width: 1px;
-	border-left-color: #DDDDDD;
-	border-left-style: solid;
-	border-bottom-width: 1px;
-	border-bottom-color: #DDDDDD;
-	border-bottom-style: solid;
-	box-shadow: -5px 5px 10px #dddddd;
-}
+<link rel="stylesheet" type="text/css" href="{{asset('front-end/css/script.css')}}">
 
-.pageFoldLeft {
-	position: absolute;
-	width: 0px;
-	height: 0px;
-	top: 0;
-	left: 0;
-	border-right-width: 1px;
-	border-right-color: #DDDDDD;
-	border-right-style: solid;
-	border-bottom-width: 1px;
-	border-bottom-color: #DDDDDD;
-	border-bottom-style: solid;
-	box-shadow: 5px 5px 10px #dddddd;
-}
-</style>
 @endpush
 
 @section('content')
@@ -58,76 +29,42 @@
             </div>
         </div>
     </div>
-    <div class="">
-        <div class="bookWrapper">
-            <div class="bookBg">
-                <div class="pageBg">
-                    <div class="pageWrapper">
-                        @foreach($images as $index=>$key)
-                        <div id="page{{$index}}" class="page">
-                            <div class="pageFace front">
-                                <h1>right 3</h1>
-                                <div class="pageFoldRight"><img src="{{asset('/public/newcatalog/'.$key)}}" alt=""></div>
-                            </div>
-                            <div class="pageFace back">
-                                <h1>left 3</h1>
-                                <div class="pageFoldLeft"><img src="{{asset('/public/newcatalog/'.$key)}}" alt=""></div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
+    {{-- <div class="flipbook">
+        @foreach($images as $index=>$key)
+        <div>
+            <img src="{{asset('/public/newcatalog/'.$key)}}" alt="">
+        </div>
+      @endforeach  
+      </div> --}}
+      {{-- <div id="flipbook">
+        <div class="hard"> Turn.js </div>
+        <div class="hard"></div>
+        <div> Page 1 </div>
+        <div> Page 2 </div>
+        <div> Page 3 </div>
+        <div> Page 4 </div>
+        <div class="hard"></div>
+        <div class="hard"></div>
+    </div> --}}
+
+    <div id="flipbook">
+        @foreach($images as $index=>$key)
+        <div class="page">
+            <img src="{{asset('/public/newcatalog/'.$key)}}" alt="">
+        </div>
+      @endforeach 
     </div>
+    <hr/> 
+    <div class="text-center">
+        <input type="number" id="pageFld" min=1 hidden/>
+        <button class="previous round" id="prevBtn">&#8249;</button>
+        <button class="next round" id="nextBtn">&#8250;</button>
+    </div>
+  
+
     @endsection
     @push('after-scripts')
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
-    <script>
-
-        TweenLite.set(".pageBg", {xPercent: -50, yPercent: -50});
-        TweenLite.set(".pageWrapper", {left: "50%", perspective: 1000 });
-        TweenLite.set(".page", {transformStyle: "preserve-3d"});
-        TweenLite.set(".back", {rotationY: -180});
-        TweenLite.set([".back", ".front"], {backfaceVisibility: "hidden"});
-
-
-        $(".page").click(
-            function() {
-                if (pageLocation[this.id] === undefined || pageLocation[this.id] == "right") {
-                    zi = ($(".left").length) + 1;
-                    TweenMax.to($(this), 1, {force3D: true, rotationY: -180, transformOrigin: "-1px top", className: '+=left', z: zi, zIndex: zi});
-                    TweenLite.set($(this), {className: '-=right'});
-                    pageLocation[this.id] = "left";
-                } else {
-                    zi = ($(".right").length) + 1;
-                    TweenMax.to($(this), 1, {force3D: true, rotationY: 0, transformOrigin: "left top", className: '+=right', z: zi, zIndex: zi
-                    });
-                    TweenLite.set($(this), {className: '-=left'});
-                    pageLocation[this.id] = "right";
-                }
-            }
-        );
-
-        $(".front").hover(
-            function() {
-                TweenLite.to($(this).find(".pageFoldRight"), 0.3, {width: "50px", height: "50px", backgroundImage: "linear-gradient(45deg,  #fefefe 0%,#f2f2f2 49%,#ffffff 50%,#ffffff 100%)"});
-            },
-            function() {
-                TweenLite.to($(this).find(".pageFoldRight"), 0.3, {width: "0px", height: "0px"});
-            }
-        );
-
-        $(".back").hover(
-            function() {
-                TweenLite.to($(this).find(".pageFoldLeft"), 0.3, {width: "50px", height: "50px", backgroundImage: "linear-gradient(135deg,  #ffffff 0%,#ffffff 50%,#f2f2f2 51%,#fefefe 100%)"		});
-            },
-            function() {
-                TweenLite.to($(this).find(".pageFoldLeft"), 0.3, {width: "0px", height: "0px"});
-            }
-        )
-
-        var pageLocation = [],
-            lastPage = null;
-            zi = 0;
-
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js" integrity="sha512-rFun1mEMg3sNDcSjeGP35cLIycsS+og/QtN6WWnoSviHU9ykMLNQp7D1uuG1AzTV2w0VmyFVpszi2QJwiVW6oQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.js" integrity="sha512-9ocft8BVEGO4YnjEW4Tkq0+d3Usuax+GF922LJML/Q5ZLmtu9hgBbUZTxKXAkm+hzIHoC3I+vYha66opI9AuSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="{{asset('front-end/js/script.js')}}"></script>
     @endpush

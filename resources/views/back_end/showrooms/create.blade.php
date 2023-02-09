@@ -5,17 +5,11 @@
 @section('content')
 
 <div >
-
     <div >
-
         <div >
-
             <h4>Créer un Magasin</h4>
-
         </div>
-
     </div>
-
 </div>
 
 @if(Session::has('errors'))

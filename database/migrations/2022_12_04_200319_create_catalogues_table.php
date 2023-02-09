@@ -15,7 +15,8 @@ class CreateCataloguesTable extends Migration
     {
         Schema::create('catalogues', function (Blueprint $table) {
             $table->id();
-            $table->string('url');
+            $table->string('url')->nullable();
+            $table->string('pdf')->nullable();
             $table->integer('user_id');
             $table->integer('showroom_id');
             $table->timestamps();

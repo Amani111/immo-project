@@ -5,12 +5,13 @@ namespace App\Http\Controllers\backend;
 use App\catalog;
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Inscription;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Showroom;
 use App\Souscategory;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     /**
@@ -22,7 +23,10 @@ class ProductController extends Controller
     {   
         $id_user = Auth::user()->id;
         $data = Product::orderBy('id','DESC')->where('user_id' ,$id_user)->paginate(7);
-        return view('back_end.products.index',compact('data'))
+              //incsription 
+        $rest =Inscription::where('user_id','=',$id_user)->where('status','=','1')->sum('rest_photo');
+
+        return view('back_end.products.index',compact('data','rest'))
 
             ->with('i', ($request->input('page', 1) - 1) * 5);
         
@@ -39,6 +43,8 @@ class ProductController extends Controller
       $showrooms = Showroom::all()->where('user_id' ,$id_user);
       $categories = Category::all();
       $subcategories = Souscategory::all();
+
+  
         return view('back_end.products.create',compact('showrooms','categories','subcategories'));
        
     }
@@ -51,13 +57,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-      
+    
         $request->validate([
             'name' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required',
             'showroom_id' => 'required',
             'category_id' => 'required',
+            'video' => 'mimes:mp4,mov,ogg|max:5128',
             ],[
 
                 'name.required'    => 'le champ titre est obligatoire!',
@@ -67,6 +74,8 @@ class ProductController extends Controller
                 'description.required' => 'le champ description est obligatoire!',
                 'showroom_id.required'      => 'Choisie une showroom!',
                 'category_id.required'      => 'choisie une categorie!',
+                'video.max'      => 'video de taille inférieur svp!',
+
 
             ]);
          
@@ -92,15 +101,17 @@ class ProductController extends Controller
             $product->prix = $request->get('prix');
             $product->showroom_id = $request->get('showroom_id');
             $product->category_id = $request->get('category_id');
-            $product->sub_category_id = $request->get('sub_category_id');
+            $product->sub_category_id = $request->get('subcategory_id');
             $product->save();
   
        
                 //new catalog
     
+                $rest = 1;
 
                 if ($request->hasfile('files')) {
                     foreach ($request->file('files') as $file) {
+                        $rest++;
                         $image = new catalog();
                         $name = $file->getClientOriginalName();
                         $file->move('public/products/catalog/', $name);
@@ -110,6 +121,24 @@ class ProductController extends Controller
                     }
                 }
                  
+               $incription = Inscription::where('user_id', Auth::user()->id)->where('status','1')->get();
+
+               foreach($incription as $inscri)
+               {
+         
+                if($inscri->rest_photo <= 0)
+                {
+                    $inscri->update(array('status' => '0'));
+                }else{
+                    $inscri->update(array('rest_photo' => DB::raw('rest_photo - '.$rest)));
+                }
+                  
+
+               }
+               
+                // if(){
+                //     Inscription::where('user_id', Auth::user()->id)->where('status','1')->update(array('status' => '0'));
+                // }
             return Redirect()->route('products.index')
                 ->with('message','Un produit à  créer');
     }
@@ -159,6 +188,8 @@ class ProductController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'showroom_id' => 'required',
             'category_id' => 'required',
+            'video' => 'mimes:mp4,mov,ogg|max:5128',
+            
             ],[
 
                 'name.required'    => 'le champ titre est obligatoire!',
@@ -168,6 +199,8 @@ class ProductController extends Controller
                 'prix.required'      => 'le champ prix est obligatoire!',
                 'showroom_id.required'      => 'Choisie une showroom!',
                 'category_id.required'      => 'choisie une categorie!',
+                'video.max'      => 'video de taille inférieur svp!',
+
 
             ]);
             $update = ['name' => $request->name, 'description' => $request->description , 'prix'=>$request->prix, 'showroom_id'=>$request->showroom_id, 'category_id'=>$request->category_id];

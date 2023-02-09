@@ -56,7 +56,7 @@
         <div class="col-md-6" >
             <strong>description *:</strong>
             <input type="text" class="form-control" name='description[]'>
-             <button type="button" class="addService btn btn-primary">Add More</button>
+             <button type="button" class="addService btn btn-primary">Ajouter</button>
         </div>
         <div class="col-md-6">
             <strong>dureé par jour*:</strong>

@@ -13,11 +13,10 @@
             <h2> Gestion des produits</h2>
 
         </div>
-
         <div class="col-md-3">
-
+            @if($rest > 0)
             <a class="btn btn-success"  href="{{ route('products.create') }}"> <i class="fa-solid fa-plus"></i> Créer</a>
-            
+           @endif 
         </div>
 
     </div>

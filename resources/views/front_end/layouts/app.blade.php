@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('front-end/css/ionicons.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('front-end/css/main.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('front-end/css/plugins.css')}}">
+    
     @stack('before-styles')
 	<style>
 	.parteunaire-btn {

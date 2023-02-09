@@ -83,13 +83,6 @@
                                         </div>
                                         <div class="content">
                                             <h2 class="product-title"> <a href="{{route('singleshowroomstuni',$showroom->id)}}">{{$showroom->name}}</a></h2>
-                                            <div class="rating">
-                                                <i class="fa fa-star active"></i>
-                                                <i class="fa fa-star active"></i>
-                                                <i class="fa fa-star active"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
                                             <p class="product-price">
                                                 <span class="main-price discounted"></span>
                                                 <span class="discounted-price"></span>

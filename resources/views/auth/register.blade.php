@@ -28,7 +28,7 @@
     {{-- <link rel="stylesheet" type="text/css" href="{{asset('front-end/css/register.css')}}"> --}}
 
 </head>
-<body style="background-image: url({{('front-end/images/backgrounds/bb3.jpg')}});  background-size: cover;background-repeat: no-repeat;">
+<body style="background-image: url({{asset('front-end/images/backgrounds/bb3.jpg')}});  background-size: cover;background-repeat: no-repeat;">
    
         <div class="page-section mb-50 reg">
             <div class="container" >

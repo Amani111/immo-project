@@ -16,10 +16,10 @@ class CataloguesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
+    {
         $user_id = Auth::user()->id;
-        $catalogues = Catalogue::where('user_id',$user_id)->get();
-        return view('back_end.catalog.index',compact('catalogues'));
+        $catalogues = Catalogue::where('user_id', $user_id)->get();
+        return view('back_end.catalog.index', compact('catalogues'));
     }
 
     /**
@@ -31,9 +31,9 @@ class CataloguesController extends Controller
     {
         $user_id = Auth::user()->id;
 
-        $showrooms = Showroom::where('user_id',$user_id)->get();
-    
-        return view('back_end.catalog.create',compact('showrooms'));
+        $showrooms = Showroom::where('user_id', $user_id)->get();
+
+        return view('back_end.catalog.create', compact('showrooms'));
     }
 
     /**
@@ -44,33 +44,38 @@ class CataloguesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'filename' => 'required',
-            'showroom_id' =>'required'
+
+        $request->validate(
+            [
+                'showroom_id' => 'required'
             ],
-            ['filename'      => 'remplir catalogue',
-            'showroom_id'      => 'choisie un showroom',
-            ]);
-            $catalog = new Catalogue();
+            [
+                'showroom_id'      => 'choisie un showroom',
+            ]
+        );
 
-           if($request->hasfile('filename'))
-         {
+        $catalog = new Catalogue();
 
-            foreach($request->file('filename') as $file)
-            {
+        if ($request->hasfile('filename')) {
+            foreach ($request->file('filename') as $file) {
                 $name = $file->getClientOriginalName();
                 $file->move('public/newcatalog/', $name);
-                $data[] = $name;  
+                $data[] = $name;
             }
-         }
-            $catalog['user_id'] = Auth::user()->id;
-            $catalog['showroom_id']= $request->showroom_id;
-            $catalog['url'] =json_encode($data);
-            $catalog->save();
-            return Redirect()->route('catelogues.index')
-            ->with('message','Un catalogues à  créer');
-
-
+            $catalog['url'] = json_encode($data);
+        }
+        if ($request->hasfile('pdf')) {
+            $pdf = $request->file('pdf');
+            $name = $pdf->getClientOriginalName();
+            $pdf->move('public/newcatalog/pdf/', $name);
+            $catalog['pdf'] = $name;
+        }
+        $catalog['user_id'] = Auth::user()->id;
+        $catalog['showroom_id'] = $request->showroom_id;
+        
+        $catalog->save();
+        return Redirect()->route('catelogues.index')
+            ->with('message', 'Un catalogues à  créer');
     }
 
     /**
@@ -92,7 +97,7 @@ class CataloguesController extends Controller
      */
     public function edit($url)
     {
-        return response()->download('./catalogues/'.$url); 
+        return response()->download('./catalogues/' . $url);
     }
 
     /**
@@ -117,6 +122,6 @@ class CataloguesController extends Controller
     {
         Catalogue::find($id)->delete();
         return redirect()->route('catelogues.index')
-                        ->with('message','catalogue à supprimé');
+            ->with('message', 'catalogue à supprimé');
     }
 }

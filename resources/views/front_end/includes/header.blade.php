@@ -24,7 +24,7 @@
 
 						<div class="logo">
 							<a href="{{route('/')}}">
-								<img width="140" height="35"  src="{{asset('front-end/images/LOgo1.png')}}" class="img-fluid"  alt="">
+								<img width="155" height="35"  src="{{asset('front-end/images/lo1-removebg-preview.png')}}" class="img-fluid"  alt="">
 							</a>
 						</div>
 
@@ -140,7 +140,7 @@
 
 						<div class="sticky-logo">
 							<a href="{{route('/')}}">
-								<img width="135" height="40" src="{{asset('front-end/images/LOgo1-removebg-preview.png')}}" class="img-fluid" alt="">
+								<img width="135" height="35" src="{{asset('front-end/images/lo1-removebg-preview.png')}}" class="img-fluid" alt="">
 							</a>
 						</div>
 

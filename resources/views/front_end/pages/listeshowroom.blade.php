@@ -68,13 +68,6 @@
                                         </div>
                                         <div class="content">
                                             <h2 class="product-title"> <a href="{{route('singleshowroomstuni',$item->id)}}">{{$item->name}}</a></h2>
-                                            <div class="rating">
-                                                <i class="fa fa-star active"></i>
-                                                <i class="fa fa-star active"></i>
-                                                <i class="fa fa-star active"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
                                             <p class="product-price">
                                                 <span class="main-price">{{$item->govlist->name}}</span>
                                                 

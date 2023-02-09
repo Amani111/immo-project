@@ -45,7 +45,7 @@
 							<div class="sidebar-list">
                                 <ul>
                                     @foreach($category as $data)
-                                    <li><a href="{{route('productwithcategory',$data->id)}}">{{$data->name}}</a></li>
+                                    <li><a href="{{route('productPromitionwithcategory',$data->id)}}">{{$data->name}}</a></li>
                                    @endforeach
                                 </ul>
 							</div>
@@ -74,14 +74,8 @@
 								</div>
 								<div class="content">
 									<h2 class="product-title"> <a href="{{route('singleproduct',$item->product_id)}}">{{$item->product->name}}</a></h2>
-									<h2 class="product-title"> <a href="{{route('singleshowroomstuni',$item->showrooms->id)}}">{{$item->showrooms->name}}</a></h2>
-									<div class="rating">
-										<i class="fa fa-star active"></i>
-										<i class="fa fa-star active"></i>
-										<i class="fa fa-star active"></i>
-										<i class="fa fa-star active"></i>
-										<i class="fa fa-star"></i>
-									</div>
+									<h2 class="product-title"> <a href="{{route('singleproduct',$item->product_id)}}">{{$item->pourcentage}}</a> %</h2>
+
 									<p class="product-price">
 										<span class="main-price discounted">{{$item->product->prix}} DT</span>
 										<span class="discounted-price">{{$item->new_prix}} DT</span>

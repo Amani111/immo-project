@@ -37,7 +37,7 @@
     <div class="col-md-4">
       <div class="card shadow-sm mb-4">
         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-          <a href="{{route('catelogues.edit',$catalog->url)}}">
+          <a target="_black" href="{{route('single.catalogue',$catalog->id)}}">
           <img width="366" height="300"  style="object-fit: contain" src="{{ asset('../backend/assets/img/mise.jpg') }}">
         </a>
         </div>
@@ -56,6 +56,9 @@
   </div>
 
 </div>
+
+
+
 
 
 

@@ -29,6 +29,8 @@ class RegisterMail extends Mailable
     public function build()
     {
         return $this->subject('Mail register')
-                    ->view('emails.registermail');
+                    ->view('emails.registermail')
+                    ->from('idcomidc11@gmail.com')
+                    ->replyTo($this->details->email);
     }
 }

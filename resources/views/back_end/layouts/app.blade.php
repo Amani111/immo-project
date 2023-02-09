@@ -24,11 +24,12 @@
   <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
   {{-- <link rel="stylesheet" type="text/css" href="{{('backend/assets/css/nucleo-svg.css')}}"  /> --}}
   {{ Html::style('backend/assets/css/nucleo-svg.css') }}
+  {{ Html::style('backend/assets/css/sweetalert.css') }}
   <!-- CSS Files -->
    <link rel="stylesheet" type="text/css" href="{{asset('backend/assets/css/corporate-ui-dashboard.css?v=1.0.0')}}"  /> 
   {{ Html::style('backend/assets/css/corporate-ui-dashboard.css?v=1.0.0') }}
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
+  @stack('before-styles')
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -50,6 +51,7 @@
    <script src="{{asset('backend/assets/js/plugins/perfect-scrollbar.min.js')}}"></script> 
    <script src="{{asset('backend/assets/js/plugins/smooth-scrollbar.min.js')}}"></script> 
   <script src="{{asset('backend/assets/js/plugins/chartjs.min.js')}}"></script>
+  <script src="{{asset('backend/assets/js/sweetalert.min.js')}}"></script>
   <script src="{{asset('backend/assets/js/plugins/swiper-bundle.min.js')}}" type="text/javascript"></script>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
