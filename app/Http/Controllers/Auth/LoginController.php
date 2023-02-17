@@ -157,8 +157,8 @@ class LoginController extends Controller
             $user->assignRole([$role->id]);
         }
 
-        $email = env('MAIL_FROM_ADDRESS', 'idcomidc11@gmail.com');
-        Mail::to($email)->send(new RegisterMail($user));
+        // $email = env('MAIL_FROM_ADDRESS', 'idcomidc11@gmail.com');
+        // Mail::to($email)->send(new RegisterMail($user));
 
         return redirect()->back()->with('success', 'vérifier votre courrier  et contactez nous pour activé votre compte !');
     }

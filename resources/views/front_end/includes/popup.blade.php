@@ -19,7 +19,7 @@
      <div class="text w-100 text-center py-5">
      <h2 class="mb-0">{{$pub->titre}}</h2>
      <h4 class="mb-4">{{$pub->description}}</h4>
-     <input type="hidden" value="{{$pub->offre}}" name="offre" id="offre">
+     <input type="hidden" value="{{$pub->active}}" name="active" id="active">
      <a href="{{route('pack')}}" class="parteunaire-btn">Commander</a>
      </div>
      </div>

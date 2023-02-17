@@ -5,13 +5,10 @@
 @section('content')
 
 @include('front_end.includes.sidebar')
-    <!--SECTION  CATEGORIES -->
-
-	@include('front_end.includes.popup')
+@include('front_end.includes.popup')
     <!--=============================================
     =            shop page content         =
     =============================================-->
-
     <div class="slider-banner-sidebar-area mb-50">
 		<div class="container">
 			<div class="row">
@@ -57,32 +54,20 @@
 									<h2 class="product-title"> <a href="{{route('singleproduct',$item->id)}}">{{$item->name}}</a></h2>
 									<h2 class="product-title"> <a href="{{route('singleshowroomstuni',$item->showrooms->id)}}">{{$item->showrooms->name}}</a></h2>
 									<p class="product-price">
-										<span class="discounted-price">{{$item->prix}} DT</span>
-									
-										
+										<span class="discounted-price">{{ isset($item->prix)? $item->prix.'DT': '' }} </span>
 									</p>
-
 									<div class="hover-icons">
 										<ul>
                                             <li><a href="{{route('singleproduct',$item->id)}}" data-tooltip="View"><i class="icon ion-md-open"></i></a></li>
-
 										</ul>
 									</div>
 								</div>
 							</div>
-
 							<!--=======  End of single product  =======-->
-
 					        @endforeach
-
-
 						</div>
-
-
-		
 					</div>
 				</div>
-
 				<!--=======  End of slider with banner and sidebar container  =======-->
 			</div>
 		</div>
@@ -96,39 +81,16 @@
 					<!--=======  slider banner sidebar three container  =======-->
 
 					<div class="slider-banner-sidebar-three-container">
-						<!--=============================================
-							=            sidebar container         =
-							=============================================-->
-
 						<div class="sidebar-container">
-
-							<!--=======  section title  =======-->
-
 							<div class="section-title-three">
 								<h3>PROMOTION MEUBLES</h3>
 							</div>
-
-							<!--=======  End of section title  =======-->
-
-							<!--=======  sidebar  =======-->
-
-							
-
-							<!--=======  End of sidebar  =======-->
 						</div>
-
 						<!--=====  End of sidebar container  ======-->
-
-						<!--=======  banner  =======-->
-
 						<div class="slider-banner home-four-banner slider-border banner-bg banner-bg-7">
-						
 						</div>
-
 						<!--=======  End of banner  =======-->
-
 						<!--=======  banner slider  =======-->
-
 						<div class="fl-slider tab-product-slider">
 							<!--=======  single product  =======-->
 						@foreach($promotionproducts as $prom)
@@ -146,26 +108,21 @@
 								<div class="content">
 									<h2 class="product-title"> <a href="{{route('singleproduct',$prom->product_id )}}">{{$prom->product->name}}</a></h2>
 									<p class="product-price">
-										<span class="main-price discounted">{{$prom->product->prix}} DT</span>
-										<span class="discounted-price">{{$prom->new_prix}} DT</span>
+										<span class="main-price discounted">{{ isset($prom->product->prix)? $prom->product->prix.'DT': '' }}</span>
+										<span class="discounted-price">{{ isset($prom->new_prix)? $prom->new_prix.'DT': '' }}</span>
 									</p>
-
 									<div class="hover-icons">
 										<ul>
 											<li><a href="{{route('singleproduct',$prom->product_id)}}" data-tooltip="View"><i class="icon ion-md-open"></i></a></li>
-
 										</ul>
 									</div>
 								</div>
 							</div>
 						@endforeach
 							<!--=======  End of single product  =======-->
-						
 						</div>
-
 						<!--=======  End of banner slider  =======-->
 					</div>
-
 					<!--=======  End of slider banner sidebar three container  =======-->
 				</div>
 			</div>
@@ -193,7 +150,6 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<!--=======  blog post slider container  =======-->
-
 					<div class="fl-slider blog-post-slider-container white-bg">
 						<!--=======  single-blog-post  =======-->
 						@foreach($actualite as $act)
@@ -204,7 +160,6 @@
 										<img width="370" height="206"  src="{{asset('/public/actualite/'.$act->image)}}"  alt="">
 									</a>
 								</div>
-
 								<div class="content">
 									<h3><a href="{{route('singleactualite',$act->id)}}">{{$act->titre}}</a></h3>
 						
@@ -216,29 +171,18 @@
 						</div>
 						@endforeach
 					</div>
-
 					<!--=======  End of blog post slider container  =======-->
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!--=====  End of blog post slider  ======-->
-	<!--=============================================
-	=            brand logo slider         =
-	=============================================-->
-
-
-
 	<!--=====  End of brand logo slider  ======-->
-	
-
 @endsection
 @push('after-scripts')
 <script>
 	$(document).ready(function(){
-		offre = $('#offre').val();
-	
+		offre = $('#active').val();
+	console.log(offre);
 		if(offre == "1"){
 			$("#exampleModalCenter").modal('show');
 			$("#close").click(function () {        
@@ -246,8 +190,6 @@
        });
 	
 		}
-
-		
 
 	});
 </script>

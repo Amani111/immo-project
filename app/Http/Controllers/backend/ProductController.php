@@ -40,9 +40,9 @@ class ProductController extends Controller
     public function create()
     {
         $id_user = Auth::user()->id;
-      $showrooms = Showroom::all()->where('user_id' ,$id_user);
-      $categories = Category::all();
-      $subcategories = Souscategory::all();
+        $showrooms = Showroom::all()->where('user_id' ,$id_user);
+        $categories = Category::all();
+        $subcategories = Souscategory::all();
 
   
         return view('back_end.products.create',compact('showrooms','categories','subcategories'));
@@ -165,11 +165,13 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $showrooms = Showroom::all();
+        $id_user = Auth::user()->id;
+        $showrooms = Showroom::all()->where('user_id',$id_user);
         $categories = Category::all();
         $product = Product::find($id);
         $subcategories = Souscategory::all();
-          return view('back_end.products.edit',compact('showrooms','categories','product','subcategories'));
+        
+        return view('back_end.products.edit',compact('showrooms','categories','product','subcategories'));
     }
 
     /**
