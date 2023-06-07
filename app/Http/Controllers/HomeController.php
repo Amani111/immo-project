@@ -171,7 +171,7 @@ class HomeController extends Controller
     public function actualite(Request $request)
     {
         $category = Category::all();
-        $actualite = Actualite::all();
+        $actualite = Actualite::orderBy('id', 'DESC')->paginate(12);
         return view('front_end.pages.actualite',compact('category','actualite'));
     }
     

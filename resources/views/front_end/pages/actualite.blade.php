@@ -34,24 +34,25 @@
 		<div class="container">
 			<div class="row">
                 @foreach($actualite as $array)
-				<div class="col-lg-4 col-sm-12 order-3 order-lg-2 mt-md-30 mt-sm-30">
+				<div class="col-lg-4 col-sm-12 col-md-4 order-3 order-lg-2 mt-md-30 mt-sm-30" style="margin-bottom:30px">
 					<!--=======  single banner  =======-->
 
 					<div class="single-banner center-text">
 						<a href="{{route('singleactualite',$array->id)}}">
 							<img width="570" height="340" src="{{asset('/public/actualite/'.$array->image)}}"  alt="">
 						</a>
-						<div class="text">
+						
+					</div>
+                    <div class="text">
 							<p></p>
 							<h5>{{$array->titre}}</h5>
 							<p></p>
 						</div>
-					</div>
-
 					<!--=======  End of single banner  =======-->
 				</div>
 			    @endforeach
 			</div>
+            {!! $actualite->render() !!}
 		</div>
 	</div>
  

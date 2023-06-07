@@ -24,7 +24,7 @@
 
 						<div class="logo">
 							<a href="{{route('/')}}">
-								<img width="155" height="35"  src="{{asset('front-end/images/lo1-removebg-preview.png')}}" class="img-fluid"  alt="">
+								<img width="155" height="35"  src="{{asset('front-end/images/logooo.png')}}" class="img-fluid"  alt="">
 							</a>
 						</div>
 
@@ -103,7 +103,7 @@
 		<div class="navigation-menu">
 			<div class="container">
 				<div class="row align-items-center justify-content-between">
-					<div class="col-12 col-lg-3 col-md-12 col-sm-12 position-relative">
+					<div class="col-12 col-lg-2 col-md-12 col-sm-12 position-relative">
 						<!--=======  category menu  =======-->
 
 						<div class="hero-side-category">
@@ -140,7 +140,7 @@
 
 						<div class="sticky-logo">
 							<a href="{{route('/')}}">
-								<img width="135" height="35" src="{{asset('front-end/images/lo1-removebg-preview.png')}}" class="img-fluid" alt="">
+								<img width="135" height="35" src="{{asset('front-end/images/logooo.png')}}" class="img-fluid" alt="">
 							</a>
 						</div>
 
@@ -156,7 +156,7 @@
 
 						<!--=======  End of search icon for tablet  =======-->
 					</div>
-					<div class="col-12 col-lg-7">
+					<div class="col-12 col-lg-8">
 						<!-- navigation section -->
 						<div class="main-menu">
 							<nav>
@@ -164,6 +164,7 @@
 									<li class="{{request()->is('/') ? 'active' : '' }}"><a href="{{route('/')}}">ACCUEIL</a></li>
 									<li class="{{ request()->is('showroom-tunimeuble') ? 'active' : '' }}"><a href="{{route('showroomstuni')}}">Showroom</a></li>
 									<li class="{{ request()->is('promotion-tunimeuble') ? 'active' : '' }}"><a href="{{route('promotionstunimeuble')}}">Promotion</a></li>
+									<li class=""><a href="">Ventes flash</a></li>
 									<li class="{{ request()->is('actualite*') ? 'active' : '' }}"><a href="{{route('actualite')}}">Actualité</a></li>
 									<li class="{{ request()->is('pack*') ? 'active' : '' }}"><a href="{{route('pack')}}">PACKS</a></li>
 									<li class="{{request()->is('contact') ? 'active' : '' }}" ><a href="{{route('contact')}}">CONTACT</a></li>
@@ -172,7 +173,7 @@
 						</div>
 						<!-- end of navigation section -->
 					</div>
-					<div class="col-12 col-lg-1">
+					<div class="col-12 col-lg-2">
 						<!--=======  navigation search bar  =======-->
 
 						<div class="navigation-search d-none d-lg-block">

@@ -397,7 +397,7 @@
 		arrows: true,
 		autoplay: true,
 		autoplaySpeed: 7000,
-		dots: false,
+		dots: true,
 		pauseOnFocus: false,
 		pauseOnHover: false,
 		fade: true,

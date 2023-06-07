@@ -115,9 +115,10 @@
 
 						<div class="social-share-buttons">
 							<h3>Suivez-nous</h3>
+					
 							<ul>
-								<li><a class="facebook" href="{{$data->facebook}}"><i class="fa fa-facebook"></i></a></li>
-								<li><a class="google-plus" href="{{$data->instagram	}}"><i class="fa fa-instagram"></i></a></li>
+								<li><a class="facebook" target="_blank" href="{{$data->showrooms->facebook}}"><i class="fa fa-facebook"></i></a></li>
+								<li><a class="google-plus" target="_blank" href="{{$data->showrooms->instagram	}}"><i class="fa fa-instagram"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -185,20 +186,10 @@
 									<img width="300" height="200"  src="{{asset('/public/products/image/'.$item->image)}}"  alt="">
 									<img width="300" height="200"  src="{{asset('/public/products/image/'.$item->image)}}"  alt="">
 								</a>
-								<!-- wishlist icon -->
-								<span class="wishlist-icon">
-									<a href="#"><i class="icon ion-md-heart-empty"></i></a>
-								</span>
+							
 							</div>
 							<div class="content">
 								<h2 class="product-title"> <a href="{{route('singleproduct',$item->id)}}">{{$item->name}}</a></h2>
-								<div class="rating">
-									<i class="fa fa-star active"></i>
-									<i class="fa fa-star active"></i>
-									<i class="fa fa-star active"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
 								<p class="product-price">
 									
 									<span class="discounted-price">{{$item->prix}} (DT)</span>

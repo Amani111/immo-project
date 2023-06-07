@@ -45,10 +45,7 @@
 										<img width="300" height="200"  src="{{asset('/public/products/image/'.$item->image)}}"  alt="">
 										<img width="300" height="200"  src="{{asset('/public/products/image/'.$item->image)}}" alt="">
 									</a>
-									<!-- wishlist icon -->
-									<span class="wishlist-icon">
-										<a href="#"><i class="icon ion-md-heart-empty"></i></a>
-									</span>
+							
 								</div>
 								<div class="content">
 									<h2 class="product-title"> <a href="{{route('singleproduct',$item->id)}}">{{$item->name}}</a></h2>
@@ -101,9 +98,7 @@
 										<img width="300" height="300"  src="{{asset('/public/products/image/'.$prom->product->image)}}" class="img-fluid" alt="">
 									</a>
 									<!-- wishlist icon -->
-									<span class="wishlist-icon">
-										<a href="#"><i class="icon ion-md-heart-empty"></i></a>
-									</span>
+							
 								</div>
 								<div class="content">
 									<h2 class="product-title"> <a href="{{route('singleproduct',$prom->product_id )}}">{{$prom->product->name}}</a></h2>

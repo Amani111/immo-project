@@ -297,7 +297,7 @@
 							$desc = json_decode($pack->description);
 							@endphp
 							@foreach($desc as $key =>$index)
-							<li><i class="fa fa-lg fa-check-circle text-success mr-2"></i>  {{$index}}</li>
+							<li style="text-align: justify;"><i class="fa fa-lg fa-check-circle text-success mr-2" style="margin-left: 35px;"></i>  {{$index}}</li>
 							@endforeach
 						  </ul>
 						</div>

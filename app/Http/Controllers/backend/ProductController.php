@@ -12,6 +12,8 @@ use App\Showroom;
 use App\Souscategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+//use Intervention\Image\Facades\Image;
+// use Intervention\Image\Facades\Image;
 class ProductController extends Controller
 {
     /**
@@ -40,9 +42,9 @@ class ProductController extends Controller
     public function create()
     {
         $id_user = Auth::user()->id;
-        $showrooms = Showroom::all()->where('user_id' ,$id_user);
-        $categories = Category::all();
-        $subcategories = Souscategory::all();
+      $showrooms = Showroom::all()->where('user_id' ,$id_user);
+      $categories = Category::all();
+      $subcategories = Souscategory::all();
 
   
         return view('back_end.products.create',compact('showrooms','categories','subcategories'));
@@ -64,7 +66,6 @@ class ProductController extends Controller
             'description' => 'required',
             'showroom_id' => 'required',
             'category_id' => 'required',
-            'video' => 'mimes:mp4,mov,ogg|max:5128',
             ],[
 
                 'name.required'    => 'le champ titre est obligatoire!',
@@ -74,22 +75,19 @@ class ProductController extends Controller
                 'description.required' => 'le champ description est obligatoire!',
                 'showroom_id.required'      => 'Choisie une showroom!',
                 'category_id.required'      => 'choisie une categorie!',
-                'video.max'      => 'video de taille inférieur svp!',
-
 
             ]);
          
             $product = new Product();
             if ($files = $request->file('image')) {
-                $destinationPath = 'public/products/image/'; // upload path
-                $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-                $files->move($destinationPath, $profileImage);
-                $product->image =$profileImage; 
+                $filename = $files->getClientOriginalName();
+                $files->move('public/products/image/', $filename);
+                $product->image =$filename; 
             }
 
             if ($files = $request->file('video')) {
                 $destinationPath = 'public/products/video/'; // upload path
-                $profileVideo = date('YmdHis') . "." . $files->getClientOriginalExtension();
+                $profileVideo = date('YmdHis') . "." . $files->getClientOriginalName();
                 $files->move($destinationPath, $profileVideo);
                 $product->video = $profileVideo;
             }
@@ -110,12 +108,13 @@ class ProductController extends Controller
                 $rest = 1;
 
                 if ($request->hasfile('files')) {
-                    foreach ($request->file('files') as $file) {
+                    $files = $request->file('files');
+                    foreach ($files as $file) {
                         $rest++;
                         $image = new catalog();
-                        $name = $file->getClientOriginalName();
-                        $file->move('public/products/catalog/', $name);
-                        $image->url = $name;
+                        $filename = $file->getClientOriginalName();
+                        $file->move('public/products/catalog/', $filename);
+                        $image->url = $filename;
                         $image->product_id = $product->id;
                         $image->save();
                     }
@@ -170,7 +169,6 @@ class ProductController extends Controller
         $categories = Category::all();
         $product = Product::find($id);
         $subcategories = Souscategory::all();
-        
         return view('back_end.products.edit',compact('showrooms','categories','product','subcategories'));
     }
 
@@ -190,8 +188,6 @@ class ProductController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'showroom_id' => 'required',
             'category_id' => 'required',
-            'video' => 'mimes:mp4,mov,ogg|max:5128',
-            
             ],[
 
                 'name.required'    => 'le champ titre est obligatoire!',
@@ -201,11 +197,14 @@ class ProductController extends Controller
                 'prix.required'      => 'le champ prix est obligatoire!',
                 'showroom_id.required'      => 'Choisie une showroom!',
                 'category_id.required'      => 'choisie une categorie!',
-                'video.max'      => 'video de taille inférieur svp!',
-
 
             ]);
-            $update = ['name' => $request->name, 'description' => $request->description , 'prix'=>$request->prix, 'showroom_id'=>$request->showroom_id, 'category_id'=>$request->category_id];
+            $update = [ 'name' => $request->name,
+                        'description' => $request->description , 
+                        'prix'=>$request->prix, 
+                        'showroom_id'=>$request->showroom_id, 
+                        'category_id'=>$request->category_id
+                     ];
             if ($files = $request->file('image')) {
                 $destinationPath = 'public/products/image/'; // upload path
                 $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
@@ -261,4 +260,25 @@ class ProductController extends Controller
 
                         ->with('message','un produit à supprimé');
     }
+
+    // public function optimazeImages()
+    // {
+    //     //get all products images 
+    //     $products_images = Product::all();
+
+    //     //loop products
+    //     // foreach ($products_images as $product) {
+    //     //     $image_path = 'public/products/image/' . $product->image;
+    //     //     $image = Image::make($image_path);
+    //     //     $image->save($image_path, 60);
+    //     // }
+
+
+    //      foreach ($products_images as $product) {
+    //         $image_path = 'public/products/image/' . $product->image;
+    //         $image = Image::make($image_path);
+    //         $image->save($image_path, 60);
+    //     }
+    //     return 'done';
+    // }
 }

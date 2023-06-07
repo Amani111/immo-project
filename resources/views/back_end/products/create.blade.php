@@ -19,7 +19,6 @@
 </div>
 
 
-
 @if(Session::has('errors'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <ul>
@@ -37,7 +36,9 @@
 
 {{ csrf_field() }}
 <div class="container">
-
+<div class="alert alert-info">
+  <strong>Info!</strong> le champ prix est optionnel 
+</div>
     <div class="row">
 
         <div class="col-md-6" >
